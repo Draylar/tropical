@@ -41,7 +41,7 @@ public abstract class TropicsBiome extends Biome
 		
 		public Biome.Settings build()
 		{
-			return new Biome.Settings().configureSurfaceBuilder(this.builder, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG).depth(0.0F).scale(0.0F).temperature(1.2F).downfall(this.downfall.toFloat()).waterColor(4445678).waterFogColor(270131).parent((String)null);
+			return new Biome.Settings().configureSurfaceBuilder(this.builder, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.NONE).depth(0.0F).scale(0.0F).temperature(1.2F).downfall(this.downfall.toFloat()).waterColor(4445678).waterFogColor(270131).parent((String)null);
 		}
 		
 		public String getId()

@@ -1,11 +1,11 @@
 package modfest.valar.tropical.common.world.dim;
 
 import modfest.valar.tropical.TropicalMod;
+import modfest.valar.tropical.common.TropicsBiomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.source.BiomeSourceType;
 import net.minecraft.world.chunk.ChunkPos;
 import net.minecraft.world.dimension.Dimension;
@@ -23,7 +23,7 @@ public class TropicalDimension extends Dimension
     @Override
     public ChunkGenerator<?> createChunkGenerator()
     {
-        return TropicalMod.FABRIC_CHUNK_GENERATOR.create(world, BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig().setBiome(Biomes.PLAINS)), new ChunkGeneratorConfig());
+        return TropicalMod.FABRIC_CHUNK_GENERATOR.create(world, BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig().setBiome(TropicsBiomes.TROPICAL_SEA)), new ChunkGeneratorConfig());
     }
 
     @Override

@@ -9,5 +9,5 @@ public class TropicalSeaBiome extends TropicsBiome
 	{
 		super(new Properties("tropical_sea", SurfaceBuilder.DEFAULT).withDownfall(Downfall.OCEANIC));
 	}
-
+	
 }

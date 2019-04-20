@@ -1,5 +1,7 @@
 package modfest.valar.tropical.common;
 
+import modfest.valar.tropical.common.biome.TropicsBiome;
+import modfest.valar.tropical.common.biome.TropicsBiome;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -23,11 +25,11 @@ public class BiomeRegistry
 		return biome;
 	}
 	
-	public static Biome register(Biome biome, String ID)
+	public static Biome register(TropicsBiome biome)
 	{
 		int thisId = getNextId();
 		
-		return register(biome, ID, thisId);
+		return register(biome, biome.getId(), thisId);
 	}
 	
 	private static int getNextId()
