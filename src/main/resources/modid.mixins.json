@@ -3,7 +3,7 @@
   "package": "modfest.valar.tropical.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-
+    "MixinPortalForcer"
   ],
   "injectors": {
     "defaultRequire": 1

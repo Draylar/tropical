@@ -75,7 +75,7 @@ public class TropicalDimension extends Dimension
     @Override
     public boolean shouldRenderFog(int i, int i1)
     {
-        return true;
+        return false;
     }
 
     @Override
