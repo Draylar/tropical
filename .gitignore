@@ -19,6 +19,8 @@ bin/
 .classpath
 .project
 
+#.launch
+
 # fabric
 
 run/
