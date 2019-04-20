@@ -5,7 +5,7 @@ import modfest.valar.tropical.common.items.DebugTeleporterItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
-public class Items
+public class TropicsItems
 {
     private static final Item.Settings DEFAULT_SETTINGS = new Item.Settings().itemGroup(TropicalMod.GROUP);
 

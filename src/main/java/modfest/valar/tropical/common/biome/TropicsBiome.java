@@ -1,6 +1,13 @@
 package modfest.valar.tropical.common.biome;
 
+import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
+
+import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
@@ -19,7 +26,36 @@ public abstract class TropicsBiome extends Biome
 	{
 		return id;
 	}
+	
+	protected abstract static class TropicalSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
+	{
 
+		public TropicalSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function_1)
+		{
+			super(function_1);
+		}
+		
+		public abstract TernarySurfaceConfig getSurfaceBlocks(double noise, long seed, int x, int z);
+		
+		@Override
+		public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int worldHeight, double noise,
+				BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig surfaceBlocks)
+		{
+			SurfaceBuilder.DEFAULT.generate(rand, chunk, biome, x, z, worldHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, this.getSurfaceBlocks(noise, seed, x, z));
+		}
+		
+	}
+	
+	protected static class SingleSurfaceConfig extends TernarySurfaceConfig
+	{
+
+		public SingleSurfaceConfig(BlockState state)
+		{
+			super(state, state, state);
+		}
+		
+	}
+	
 	public static class Properties
 	{
 		private final String name;

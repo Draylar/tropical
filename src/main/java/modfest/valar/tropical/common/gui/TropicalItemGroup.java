@@ -1,4 +1,4 @@
-package modfest.valar.tropical.common;
+package modfest.valar.tropical.common.gui;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
