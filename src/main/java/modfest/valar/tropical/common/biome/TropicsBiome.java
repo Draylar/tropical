@@ -38,7 +38,7 @@ public abstract class TropicsBiome extends Biome
 		
 		public String getId()
 		{
-			return TropicalMod.MODID + ":" + this.name;
+			return "tropical" + ":" + this.name;
 		}
 	}
 
