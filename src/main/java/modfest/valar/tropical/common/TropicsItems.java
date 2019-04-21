@@ -11,12 +11,14 @@ public class TropicsItems
     private static final Item.Settings DEFAULT_SETTINGS = new Item.Settings().itemGroup(TropicalMod.GROUP);
 
     private static final Item DEBUG_TELEPORTER = new DebugTeleporterItem(DEFAULT_SETTINGS);
-    public static final Item MARGARITA = new MargaritaItem(DEFAULT_SETTINGS);
+    private static final Item MARGARITA = new MargaritaItem(DEFAULT_SETTINGS);
+    private static final Item ICE_CUBES = new Item(DEFAULT_SETTINGS);
 
     public static void register()
     {
         register(DEBUG_TELEPORTER, "debug_teleporter");
         register(MARGARITA, "margarita");
+        register(ICE_CUBES, "ice_cubes");
     }
 
     private static void register(Item item, String name)
