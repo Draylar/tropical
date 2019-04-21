@@ -1,10 +1,13 @@
 package modfest.valar.tropical.common.world.dim;
 
+import java.util.function.Function;
+
 import modfest.valar.tropical.TropicalMod;
 import modfest.valar.tropical.common.TropicsBiomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.source.BiomeSourceType;
 import net.minecraft.world.chunk.ChunkPos;
@@ -15,6 +18,17 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 
 public class TropicalDimension extends Dimension
 {
+	public static final BiomeSourceType<TropicalBiomeSourceConfig, TropicalBiomeSource> BIOME_SOURCE = Registry.register(Registry.BIOME_SOURCE_TYPE, "tropical:tropical", new BiomeSourceType<TropicalBiomeSourceConfig, TropicalBiomeSource>(new Function<TropicalBiomeSourceConfig, TropicalBiomeSource>()
+	{
+
+		@Override
+		public TropicalBiomeSource apply(TropicalBiomeSourceConfig t)
+		{
+			return new TropicalBiomeSource();
+			
+		}
+	}, TropicalBiomeSourceConfig::new));
+	
     public TropicalDimension(World world_1, DimensionType dimensionType_1)
     {
         super(world_1, dimensionType_1);
