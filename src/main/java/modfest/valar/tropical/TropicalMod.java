@@ -2,7 +2,7 @@ package modfest.valar.tropical;
 
 import modfest.valar.tropical.common.TropicsBlocks;
 import modfest.valar.tropical.common.TropicsItems;
-import modfest.valar.tropical.common.gui.TropicalItemGroup;
+import modfest.valar.tropical.common.TropicalItemGroup;
 import modfest.valar.tropical.common.world.dim.ChunkGeneratorTypeWorkaround;
 import modfest.valar.tropical.common.world.dim.TropicalDimension;
 import modfest.valar.tropical.common.world.dim.TropicalDimensionType;
