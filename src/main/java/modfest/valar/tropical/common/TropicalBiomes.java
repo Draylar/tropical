@@ -7,7 +7,7 @@ import modfest.valar.tropical.common.biome.TropicalSeaBiome;
 import modfest.valar.tropical.common.biome.WhiteShoreBiome;
 import net.minecraft.world.biome.Biome;
 
-public class TropicsBiomes
+public class TropicalBiomes
 {
 	//Only have the frameworks of the biomes at the moment
 	public static final Biome TROPICAL_SEA = BiomeRegistry.register(new TropicalSeaBiome());

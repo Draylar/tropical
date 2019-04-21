@@ -8,7 +8,7 @@ import com.google.common.collect.Sets;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import modfest.valar.tropical.common.TropicsBiomes;
+import modfest.valar.tropical.common.TropicalBiomes;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -23,13 +23,13 @@ public class TropicalBiomeSource extends BiomeSource
 
 	public TropicalBiomeSource()
 	{
-		this.allowedBiomes = TropicsBiomes.asBiomeArray();
+		this.allowedBiomes = TropicalBiomes.asBiomeArray();
 	}
 
 	@Override
 	public Biome getBiome(int x, int z)
 	{
-		return TropicsBiomes.TROPICAL_SEA;
+		return TropicalBiomes.TROPICAL_SEA;
 	}
 
 	@Override

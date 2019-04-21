@@ -1,7 +1,8 @@
 package modfest.valar.tropical;
 
-import modfest.valar.tropical.common.TropicsBlocks;
-import modfest.valar.tropical.common.TropicsItems;
+import modfest.valar.tropical.common.TropicalEntities;
+import modfest.valar.tropical.common.TropicalBlocks;
+import modfest.valar.tropical.common.TropicalItems;
 import modfest.valar.tropical.common.TropicalItemGroup;
 import modfest.valar.tropical.common.world.dim.ChunkGeneratorTypeWorkaround;
 import modfest.valar.tropical.common.world.dim.TropicalDimension;
@@ -21,8 +22,9 @@ public class TropicalMod implements ModInitializer
 	@Override
 	public void onInitialize()
 	{
-		TropicsBlocks.register();
-		TropicsItems.register();
+		TropicalBlocks.register();
+		TropicalItems.register();
+		TropicalEntities.register();
 	}
 
 	public static Identifier getModIdentifier(String name)
