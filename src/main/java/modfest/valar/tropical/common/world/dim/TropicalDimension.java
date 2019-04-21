@@ -37,7 +37,7 @@ public class TropicalDimension extends Dimension
     @Override
     public ChunkGenerator<?> createChunkGenerator()
     {
-        return TropicalMod.FABRIC_CHUNK_GENERATOR.create(world, BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig().setBiome(TropicsBiomes.TROPICAL_SEA)), new ChunkGeneratorConfig());
+        return TropicalMod.FABRIC_CHUNK_GENERATOR.create(world, BIOME_SOURCE.applyConfig(BIOME_SOURCE.getConfig()), new ChunkGeneratorConfig());
     }
 
     @Override
