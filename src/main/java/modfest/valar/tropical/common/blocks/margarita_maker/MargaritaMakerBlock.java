@@ -16,7 +16,7 @@ public class MargaritaMakerBlock extends BlockWithEntity
 {
     private static VoxelShape MACHINE_SHAPE;
 
-    protected MargaritaMakerBlock(Settings block$Settings_1)
+    public MargaritaMakerBlock(Settings block$Settings_1)
     {
         super(block$Settings_1);
     }
@@ -31,7 +31,7 @@ public class MargaritaMakerBlock extends BlockWithEntity
     public boolean activate(BlockState blockState_1, World world_1, BlockPos blockPos_1, PlayerEntity playerEntity_1, Hand hand_1, BlockHitResult blockHitResult_1)
     {
         BlockEntity entity = world_1.getBlockEntity(blockPos_1);
-        if(entity instanceof MargaritaMakerBlockEntity)
+        if(entity instanceof MargaritaMakerBlockEntity && hand_1 == Hand.MAIN)
         {
             ((MargaritaMakerBlockEntity) entity).activate(blockState_1, world_1, blockPos_1, playerEntity_1, hand_1, blockHitResult_1);
         }
