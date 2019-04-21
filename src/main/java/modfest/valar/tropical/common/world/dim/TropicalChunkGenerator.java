@@ -39,7 +39,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 
                 for (int y = 0; y < posY * convertRange(distanceFromOrigin, 0, 1000, 1, 0); y++)
                 {
-                    chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.BEDROCK.getDefaultState(), false);
+                    chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.STONE.getDefaultState(), false);
                 }
             }
         }
@@ -48,7 +48,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         {
             for (int z = 0; z < 16; z++)
             {
-                chunk_1.setBlockState(new BlockPos(x, 0, z), net.minecraft.block.Blocks.BEDROCK.getDefaultState(), false);
+                chunk_1.setBlockState(new BlockPos(x, 0, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
             }
         }
     }

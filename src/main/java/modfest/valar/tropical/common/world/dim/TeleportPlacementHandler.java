@@ -15,7 +15,7 @@ public class TeleportPlacementHandler
     {
         if (newWorld.dimension.getType() == TropicalMod.TROPICAL_DIMENSION)
         {
-            BlockPos spawnPos = new BlockPos(0, 100, 0);
+            BlockPos spawnPos = new BlockPos(500, 100, 0);
             entity.setPositionAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
         }
     }

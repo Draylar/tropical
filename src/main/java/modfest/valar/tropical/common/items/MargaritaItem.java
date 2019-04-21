@@ -1,5 +1,6 @@
 package modfest.valar.tropical.common.items;
 
+import modfest.valar.tropical.common.TropicalItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodItemSetting;
@@ -24,5 +25,10 @@ public class MargaritaItem extends Item
         }
 
         return super.onItemFinishedUsing(itemStack_1, world_1, livingEntity_1);
+    }
+
+    public static ItemStack createMargarita()
+    {
+        return new ItemStack(TropicalItems.MARGARITA);
     }
 }
