@@ -14,6 +14,6 @@ public class SwordFishEntityRenderer extends MobEntityRenderer<SwordFishEntity, 
     @Override
     protected Identifier getTexture(SwordFishEntity var1)
     {
-        return null;
+        return new Identifier("tropical", "textures/entity/sword_fish.png");
     }
 }

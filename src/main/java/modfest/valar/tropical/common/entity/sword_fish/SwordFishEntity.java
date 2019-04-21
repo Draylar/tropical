@@ -4,7 +4,9 @@ import modfest.valar.tropical.common.TropicalEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 public class SwordFishEntity extends FishEntity
@@ -23,12 +25,12 @@ public class SwordFishEntity extends FishEntity
     @Override
     protected ItemStack getFishBucketItem()
     {
-        return null;
+        return new ItemStack(Items.WATER_BUCKET);
     }
 
     @Override
     protected SoundEvent getFlopSound()
     {
-        return null;
+        return SoundEvents.ENTITY_COD_FLOP;
     }
 }

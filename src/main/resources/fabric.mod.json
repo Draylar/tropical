@@ -21,6 +21,9 @@
   "entrypoints": {
     "main": [
       "modfest.valar.tropical.TropicalMod"
+    ],
+    "client": [
+      "modfest.valar.tropical.TropicalModClient"
     ]
   },
   "mixins": [
