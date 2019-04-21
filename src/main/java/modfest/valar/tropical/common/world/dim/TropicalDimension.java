@@ -34,7 +34,8 @@ public class TropicalDimension extends Dimension
         super(world_1, dimensionType_1);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public ChunkGenerator<?> createChunkGenerator()
     {
         return TropicalMod.FABRIC_CHUNK_GENERATOR.create(world, BIOME_SOURCE.applyConfig(BIOME_SOURCE.getConfig()), new ChunkGeneratorConfig());
