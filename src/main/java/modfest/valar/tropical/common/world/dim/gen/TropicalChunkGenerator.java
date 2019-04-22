@@ -1,11 +1,10 @@
 package modfest.valar.tropical.common.world.dim.gen;
 
-import java.util.Random;
-
 import modfest.valar.tropical.common.TropicalBiomes;
 import modfest.valar.tropical.util.SeedCache;
 import modfest.valar.tropical.util.noise.NoiseGenerator;
 import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
+import modfest.valar.tropical.util.noise.OpenSimplexNoise;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -15,6 +14,8 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.SurfaceChunkGenerator;
 
+import java.util.Random;
+
 public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGeneratorConfig>
 {
 
@@ -22,39 +23,38 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
     private static NoiseGenerator heightNoise = new OctaveNoiseGenerator(0, 2);
     private static NoiseGenerator blockNoise;
     private static NoiseGenerator biomeNoise;
+    private static OpenSimplexNoise openSimplexNoise;
 
-    private static final int MIDLINE = 100;
+    private static final double MIDLINE = 100;
 
     public TropicalChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
         super(world, biomeSource_1, 4, 8, 256, config, true);
-        SeedCache.setSeed(world.getSeed());
         this.random.consume(2620);
 
         heightNoise = new OctaveNoiseGenerator(world.getSeed(), 2);
         blockNoise = new OctaveNoiseGenerator(world.getSeed(), 6).apply(8D);
         biomeNoise = new OctaveNoiseGenerator(world.getSeed() + 23L, 1).apply(15D);
+        openSimplexNoise = new OpenSimplexNoise();
     }
 
     @Override
     public void buildSurface(Chunk chunk_1)
     {
+        for (int x = 0; x < 16; x++)
         {
-            for (int x = 0; x < 16; x++)
+            for (int z = 0; z < 16; z++)
             {
-                for (int z = 0; z < 16; z++)
+                int posX = x + chunk_1.getPos().getStartX();
+                int posZ = z + chunk_1.getPos().getStartZ();
+
+                double height = getTerrainScale(posX, posZ);
+
+                for (int y = 0; y < height; y++)
                 {
-                    int posX = x + chunk_1.getPos().getStartX();
-                    int posZ = z + chunk_1.getPos().getStartZ();
-
-                    double height = getTerrainScale(posX, posZ);
-
-                    for (int y = 0; y < height; y++)
-                    {
-                        chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.STONE.getDefaultState(), false);
-                    }
-                    
-                    getBiome(posX, posZ).buildSurface(new Random(234612362L * posX + -8264616432452L * posZ), chunk_1, posX, posZ, 255, blockNoise.eval(x, z), Blocks.STONE.getDefaultState(), Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
+                    chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.STONE.getDefaultState(), false);
                 }
+
+                getBiome(posX, posZ).buildSurface(new Random(234612362L * posX + -8264616432452L * posZ), chunk_1, posX, posZ, 255, blockNoise.eval(x, z), Blocks.STONE.getDefaultState(), Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
             }
         }
     }
@@ -80,38 +80,28 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
     }
 
 
-    private static double getTerrainScale(int x, int z)
+    private static double getTerrainScale(double x, double z)
     {
-        // position based on height noise
-        double posY = MIDLINE + heightNoise.eval(x / 30, z / 30) * 6;
+        double noiseHeight;
+        if(getDistanceFromOrigin(x, z) < 300)
+        {
+            noiseHeight = openSimplexNoise.eval(x / 30, z / 30) * 7;
+        }
 
-        // 0 - 1 number representing how far out we are from 0, 0
-        double distanceScale = convertRange(
-                Math.min(
-                        1000,
-                        getDistanceFrom(
-                                0,
-                                0,
-                                x,
-                                z)
-                ),
-                0,
-                1000,
-                1,
-                0
-        );
+        else noiseHeight = openSimplexNoise.eval(x / 30, z / 30) * 3;
 
-        return posY * distanceScale;
+        double posY = (MIDLINE  + noiseHeight) * (1 - Math.min(1000, getDistanceFromOrigin(x, z)) / 1000);
+
+        return posY;
     }
 
-    public static double convertRange(double value, double oldMin, double oldMax, double newMin, double newMax)
-    {
-        return (((value - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
-    }
 
-    public static double getDistanceFrom(int originX, int originZ, int currentX, int currentZ)
+
+    private static double getDistanceFromOrigin(double x, double z)
     {
-        return Math.sqrt((currentX - originX) * (currentX - originX) + (currentZ - originZ) * (currentZ - originZ));
+        double xDifference = Math.pow(x, 2);
+        double zDifference = Math.pow(z, 2);
+        return Math.sqrt(xDifference + zDifference);
     }
 
     public int getSpawnHeight() {
