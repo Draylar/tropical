@@ -19,7 +19,7 @@ public class OctaveNoiseGenerator implements NoiseGenerator, DoubleFunction<Octa
         generators = new SingleNoiseGenerator[octaves];
 
         for (int i = 0; i < octaves; ++i)
-            generators[i] = new SingleNoiseGenerator(seed, INITIAL_SCALE / Math.pow(2, i));
+            generators[i] = new SingleNoiseGenerator(seed, INITIAL_SCALE / Math.pow(2, i), 1D / (i + 1D));
     }
 
     @Override
@@ -58,15 +58,16 @@ public class OctaveNoiseGenerator implements NoiseGenerator, DoubleFunction<Octa
     public static class SingleNoiseGenerator implements NoiseGenerator, DoubleFunction<SingleNoiseGenerator>
     {
         private final long seed;
-        private double scale;
+        private double scale, amplitude;
 
         private final OpenSimplexNoise parent;
 
-        public SingleNoiseGenerator(long seed, double scale)
+        public SingleNoiseGenerator(long seed, double scale, double amplitude)
         {
             this.seed = seed;
             this.scale = scale;
-
+            this.amplitude = amplitude;
+            
             this.parent = new OpenSimplexNoise(seed);
         }
 
@@ -79,13 +80,13 @@ public class OctaveNoiseGenerator implements NoiseGenerator, DoubleFunction<Octa
         @Override
         public double eval(double x, double y)
         {
-            return this.parent.eval(x / scale, y / scale);
+            return amplitude * this.parent.eval(x / scale, y / scale);
         }
 
         @Override
         public double eval(double x, double y, double z)
         {
-            return this.parent.eval(x / scale, y / scale, z / scale);
+            return amplitude * this.parent.eval(x / scale, y / scale, z / scale);
         }
 
         @Override

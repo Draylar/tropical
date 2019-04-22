@@ -1,7 +1,7 @@
 package modfest.valar.tropical.common.world.dim.gen;
 
 import modfest.valar.tropical.util.noise.NoiseGenerator;
-import modfest.valar.tropical.util.noise.OpenSimplexNoise;
+import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -20,7 +20,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
     public TropicalChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
         super(world, biomeSource_1, 4, 8, 256, config, true);
         this.random.consume(2620);
-        simplexnoise = new OpenSimplexNoise();
+        simplexnoise = new OctaveNoiseGenerator(0L, 2);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
                 double distanceFromOrigin = getDistanceFrom(0, 0, (int) posX, (int) posZ);
                 System.out.println(distanceFromOrigin);
                 distanceFromOrigin = Math.min(1000, distanceFromOrigin);
-
+                
                 for (int y = 0; y < posY * convertRange(distanceFromOrigin, 0, 1000, 1, 0); y++)
                 {
                     chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.STONE.getDefaultState(), false);
