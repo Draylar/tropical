@@ -17,7 +17,7 @@ public class WhiteShoreBiome extends TropicsBiome
 	private static class WhiteShoreBuilder extends TropicalSurfaceBuilder
 	{
 		//TODO will be white sand
-		private static final TernarySurfaceConfig DEFAULT_CONFIG = new SingleSurfaceConfig(Blocks.SAND.getDefaultState());
+		private static final TernarySurfaceConfig DEFAULT_CONFIG = new TernarySurfaceConfig(Blocks.SAND.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.SAND.getDefaultState());
 		
 		public WhiteShoreBuilder()
 		{

@@ -46,16 +46,6 @@ public abstract class TropicsBiome extends Biome
 		
 	}
 	
-	protected static class SingleSurfaceConfig extends TernarySurfaceConfig
-	{
-
-		public SingleSurfaceConfig(BlockState state)
-		{
-			super(state, state, state);
-		}
-		
-	}
-	
 	public static class Properties
 	{
 		private final String name;

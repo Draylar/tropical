@@ -52,14 +52,6 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
                     }
                 }
             }
-
-            for (int x = 0; x < 16; x++)
-            {
-                for (int z = 0; z < 16; z++)
-                {
-                    chunk_1.setBlockState(new BlockPos(x, 0, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
-                }
-            }
             
             for (int x = 0; x < 16; x++)
             {
