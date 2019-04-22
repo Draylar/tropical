@@ -1,6 +1,7 @@
-package modfest.valar.tropical.common.world.dim;/*
+package modfest.valar.tropical.util.noise;
+/*
  * OpenSimplex Noise in Java.
- * by Kurt Spencer
+ * Implementation by Kurt Spencer
  *
  * v1.1 (October 5, 2014)
  * - Added 2D and 4D implementations.
@@ -14,7 +15,7 @@ package modfest.valar.tropical.common.world.dim;/*
  *   will be the same when ported to other languages.
  */
 
-public class OpenSimplexNoise
+public class OpenSimplexNoise implements NoiseGenerator
 {
 
     private static final double STRETCH_CONSTANT_2D = -0.211324865405187;    //(1/Math.sqrt(2+1)-1)/2;
@@ -2135,5 +2136,15 @@ public class OpenSimplexNoise
             3, -1, -1, -1,      1, -3, -1, -1,      1, -1, -3, -1,      1, -1, -1, -3,
             -3, -1, -1, -1,     -1, -3, -1, -1,     -1, -1, -3, -1,     -1, -1, -1, -3,
     };
+
+	@Override
+	@Deprecated
+	/**
+	 * @deprecated do not use. throws an exception.
+	 */
+	public long getSeed() throws UnsupportedOperationException
+	{
+		throw new UnsupportedOperationException("OpenSimplexNoise does not support getSeed()");
+	}
 }
 

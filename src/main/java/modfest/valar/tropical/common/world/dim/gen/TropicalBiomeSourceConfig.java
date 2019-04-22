@@ -1,4 +1,4 @@
-package modfest.valar.tropical.common.world.dim;
+package modfest.valar.tropical.common.world.dim.gen;
 
 import net.minecraft.world.biome.source.BiomeSourceConfig;
 

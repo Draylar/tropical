@@ -3,6 +3,8 @@ package modfest.valar.tropical.common.world.dim;
 import java.util.function.Function;
 
 import modfest.valar.tropical.TropicalMod;
+import modfest.valar.tropical.common.world.dim.gen.TropicalBiomeSource;
+import modfest.valar.tropical.common.world.dim.gen.TropicalBiomeSourceConfig;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;

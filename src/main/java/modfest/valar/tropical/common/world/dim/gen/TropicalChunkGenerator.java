@@ -1,5 +1,6 @@
-package modfest.valar.tropical.common.world.dim;
+package modfest.valar.tropical.common.world.dim.gen;
 
+import modfest.valar.tropical.util.noise.OpenSimplexNoise;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
