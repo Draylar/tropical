@@ -1,5 +1,6 @@
 package modfest.valar.tropical.common.world.dim.gen;
 
+import modfest.valar.tropical.util.noise.NoiseGenerator;
 import modfest.valar.tropical.util.noise.OpenSimplexNoise;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +14,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 {
 
     // use a map to determine where peaks are, and a map to determine how tall they are
-    private final OpenSimplexNoise simplexnoise;
+    private final NoiseGenerator simplexnoise;
     private final int MIDLINE = 100;
 
     public TropicalChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
