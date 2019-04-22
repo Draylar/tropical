@@ -1,10 +1,14 @@
 package modfest.valar.tropical.common.world.dim.gen;
 
+import modfest.valar.tropical.common.TropicalBiomes;
 import modfest.valar.tropical.util.noise.NoiseGenerator;
+import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
 import modfest.valar.tropical.util.noise.OpenSimplexNoise;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
@@ -14,8 +18,8 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 {
 
     // use a map to determine where peaks are, and a map to determine how tall they are
-    private final NoiseGenerator simplexnoise;
-    private final int MIDLINE = 100;
+    private static NoiseGenerator simplexnoise = new OctaveNoiseGenerator(0, 0);
+    private static final int MIDLINE = 100;
 
     public TropicalChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
         super(world, biomeSource_1, 4, 8, 256, config, true);
@@ -23,44 +27,39 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         simplexnoise = new OpenSimplexNoise();
     }
 
-    @Override
-    public void buildSurface(Chunk chunk_1)
+    public static Biome getBiome(int x, int z)
     {
-        for (int x = 0; x < 16; x++)
+        double posY = MIDLINE + simplexnoise.eval( x / 30,z / 30) * 6;
+        double distanceFromOrigin = getDistanceFrom(0, 0, (int) x, (int) z);
+        distanceFromOrigin = Math.min(1000, distanceFromOrigin);
+
+        double range = convertRange(distanceFromOrigin, 0, 1000, 1, 0);
+        double finalY = posY * range;
+
+        System.out.println(range);
+
+        if(finalY <= 50)
         {
-            for (int z = 0; z < 16; z++)
-            {
-                double posX = x + chunk_1.getPos().getStartX();
-                double posZ = z + chunk_1.getPos().getStartZ();
-
-                double posY = MIDLINE + simplexnoise.eval( posX / 30,posZ / 30) * 6;
-
-                double distanceFromOrigin = getDistanceFrom(0, 0, (int) posX, (int) posZ);
-                System.out.println(distanceFromOrigin);
-                distanceFromOrigin = Math.min(1000, distanceFromOrigin);
-
-                for (int y = 0; y < posY * convertRange(distanceFromOrigin, 0, 1000, 1, 0); y++)
-                {
-                    chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.STONE.getDefaultState(), false);
-                }
-            }
+            return TropicalBiomes.TROPICAL_SEA;
         }
 
-        for (int x = 0; x < 16; x++)
+        if(finalY <= 65)
         {
-            for (int z = 0; z < 16; z++)
-            {
-                chunk_1.setBlockState(new BlockPos(x, 0, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
-            }
+            return TropicalBiomes.WHITE_SHORE;
+        }
+
+        else
+        {
+            return Biomes.FOREST;
         }
     }
 
-    public double convertRange(double value, double oldMin, double oldMax, double newMin, double newMax)
+    public static double convertRange(double value, double oldMin, double oldMax, double newMin, double newMax)
     {
         return (((value - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
     }
 
-    public double getDistanceFrom(int originX, int originZ, int currentX, int currentZ)
+    public static double getDistanceFrom(int originX, int originZ, int currentX, int currentZ)
     {
         return Math.sqrt((currentX - originX) * (currentX - originX) + (currentZ - originZ) * (currentZ - originZ));
     }
