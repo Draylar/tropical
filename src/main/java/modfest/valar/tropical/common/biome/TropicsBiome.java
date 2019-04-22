@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import modfest.valar.tropical.common.world.dim.biomesource.BiomePopulator;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -14,12 +15,14 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 public abstract class TropicsBiome extends Biome
 {
 	private final String id;
+	protected final BiomePopulator theBiomePopulator;
 	
 	protected TropicsBiome(Properties properties)
 	{
 		super(properties.build());
 		
 		this.id = properties.getId();
+		theBiomePopulator = new BiomePopulator(this);
 	}
 	
 	public String getId()

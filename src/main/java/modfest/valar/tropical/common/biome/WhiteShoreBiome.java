@@ -3,10 +3,8 @@ package modfest.valar.tropical.common.biome;
 import java.util.Random;
 
 import modfest.valar.tropical.common.world.dim.gen.TropicsGenUtils;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;

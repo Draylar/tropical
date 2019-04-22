@@ -1,4 +1,4 @@
-package modfest.valar.tropical.common.world.dim.gen;
+package modfest.valar.tropical.common.world.dim.biomesource;
 
 import java.util.List;
 import java.util.Random;
@@ -9,6 +9,7 @@ import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import modfest.valar.tropical.common.TropicalBiomes;
+import modfest.valar.tropical.common.world.dim.gen.TropicalChunkGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;

@@ -15,7 +15,7 @@ public class OctaveNoiseGenerator implements NoiseGenerator, DoubleFunction<Octa
     {
         this.seed = seed;
         this.octaves = octaves;
-
+        
         generators = new SingleNoiseGenerator[octaves];
 
         for (int i = 0; i < octaves; ++i)
