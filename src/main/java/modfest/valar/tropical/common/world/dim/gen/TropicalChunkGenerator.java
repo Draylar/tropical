@@ -1,14 +1,14 @@
 package modfest.valar.tropical.common.world.dim.gen;
 
+import java.util.Random;
+
 import modfest.valar.tropical.common.TropicalBiomes;
 import modfest.valar.tropical.util.noise.NoiseGenerator;
 import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
-import modfest.valar.tropical.util.noise.OpenSimplexNoise;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
@@ -18,13 +18,15 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 {
 
     // use a map to determine where peaks are, and a map to determine how tall they are
-    private static NoiseGenerator simplexnoise = new OctaveNoiseGenerator(0, 0);
+    private static NoiseGenerator simplexnoise = new OctaveNoiseGenerator(0, 2);
+    private static NoiseGenerator surfaceBlockNoise;
     private static final int MIDLINE = 100;
 
     public TropicalChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
         super(world, biomeSource_1, 4, 8, 256, config, true);
         this.random.consume(2620);
-        simplexnoise = new OctaveNoiseGenerator(world.getSeed(), 0);
+        simplexnoise = new OctaveNoiseGenerator(world.getSeed(), 2);
+        surfaceBlockNoise = new OctaveNoiseGenerator(0, 6).apply(0.2F);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
                 {
                     double posX = x + chunk_1.getPos().getStartX();
                     double posZ = z + chunk_1.getPos().getStartZ();
-
+                    
                     double posY = MIDLINE + simplexnoise.eval(posX / 30, posZ / 30) * 6;
 
                     double distanceFromOrigin = getDistanceFrom(0, 0, (int) posX, (int) posZ);
@@ -56,6 +58,14 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
                 for (int z = 0; z < 16; z++)
                 {
                     chunk_1.setBlockState(new BlockPos(x, 0, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
+                }
+            }
+            
+            for (int x = 0; x < 16; x++)
+            {
+                for (int z = 0; z < 16; z++)
+                {
+                    getBiome(x, z).buildSurface(new Random(234612362L * x + -8264616432452L * z), chunk_1, x, z, 255, surfaceBlockNoise.eval(x, z), Blocks.STONE.getDefaultState(), Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
                 }
             }
         }
