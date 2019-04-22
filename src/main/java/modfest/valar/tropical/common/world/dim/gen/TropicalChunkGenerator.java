@@ -27,6 +27,41 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         simplexnoise = new OpenSimplexNoise();
     }
 
+    @Override
+    public void buildSurface(Chunk chunk_1)
+    {
+        {
+            for (int x = 0; x < 16; x++)
+            {
+                for (int z = 0; z < 16; z++)
+                {
+                    double posX = x + chunk_1.getPos().getStartX();
+                    double posZ = z + chunk_1.getPos().getStartZ();
+
+                    double posY = MIDLINE + simplexnoise.eval(posX / 30, posZ / 30) * 6;
+
+                    double distanceFromOrigin = getDistanceFrom(0, 0, (int) posX, (int) posZ);
+                    System.out.println(distanceFromOrigin);
+                    distanceFromOrigin = Math.min(1000, distanceFromOrigin);
+
+                    for (int y = 0; y < posY * convertRange(distanceFromOrigin, 0, 1000, 1, 0); y++)
+                    {
+                        chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.STONE.getDefaultState(), false);
+                    }
+                }
+            }
+
+            for (int x = 0; x < 16; x++)
+            {
+                for (int z = 0; z < 16; z++)
+                {
+                    chunk_1.setBlockState(new BlockPos(x, 0, z), net.minecraft.block.Blocks.STONE.getDefaultState(), false);
+                }
+            }
+        }
+    }
+
+
     public static Biome getBiome(int x, int z)
     {
         double posY = MIDLINE + simplexnoise.eval( x / 30,z / 30) * 6;
