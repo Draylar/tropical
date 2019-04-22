@@ -2,6 +2,7 @@ package modfest.valar.tropical.common.biome;
 
 import java.util.Random;
 
+import modfest.valar.tropical.common.TropicalBlocks;
 import modfest.valar.tropical.common.world.dim.gen.TropicsGenUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,7 +21,7 @@ public class WhiteShoreBiome extends TropicsBiome
 	}
 	
 	private static final SurfaceBuilder<TernarySurfaceConfig> WHITE_SHORE_BUILDER;
-	private static final TernarySurfaceConfig WHITE_SHORE_BLOCKS = new TernarySurfaceConfig(Blocks.SAND.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.SAND.getDefaultState());
+	private static final TernarySurfaceConfig WHITE_SHORE_BLOCKS = new TernarySurfaceConfig(TropicalBlocks.WHITE_SAND.getDefaultState(), TropicalBlocks.WHITE_SAND.getDefaultState(), TropicalBlocks.WHITE_SAND.getDefaultState());
 	
 	static
 	{

@@ -1,0 +1,95 @@
+package modfest.valar.tropical.common.world.feature;
+
+import java.util.Random;
+import java.util.Set;
+
+import modfest.valar.tropical.util.gen.BlockGenerator;
+import modfest.valar.tropical.util.gen.PublicWorldModifierTester;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.ModifiableWorld;
+import net.minecraft.world.TestableWorld;
+import net.minecraft.world.gen.feature.AbstractTreeFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+
+public abstract class TreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifierTester
+{
+	private final int heightMin;
+	private final int heightDelta;
+	private boolean isBeachFeature, isWaterFeature = false;
+	
+	public TreeFeature(boolean notify, int minHeight, int maxHeight)
+	{
+		super(DefaultFeatureConfig::deserialize, notify);
+		
+		this.heightMin = minHeight;
+		this.heightDelta = maxHeight - minHeight;
+	}
+	
+	protected void setBeachFeature()
+	{
+		this.isBeachFeature = true;
+	}
+	
+	protected void setWaterFeature()
+	{
+		this.isWaterFeature = true;
+	}
+	
+	@Override
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state)
+	{
+		super.setBlockState(set, world, pos, state);
+	}
+
+	@Override
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableTestableWorld world, BlockPos pos, BlockState state)
+	{
+		if ((canTreeReplace(world, pos) || world.testBlockState(pos, (blockState_1) -> {
+			Block block = blockState_1.getBlock();
+			return block == Blocks.GRASS;
+		})) && world.testBlockState(pos, (blockState_1) -> {
+			Block block = blockState_1.getBlock();
+			return block != Blocks.GRASS_BLOCK && block != Blocks.DIRT && block != Blocks.COARSE_DIRT;
+		}))
+				super.setBlockState(set, world, pos, state);
+	}
+
+	@Override
+	protected boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random rand, BlockPos blockPos_1)
+	{
+		int height = heightMin + rand.nextInt(heightDelta);
+		
+		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
+
+		BlockGenerator generator = new BlockGenerator(world, set_1);
+		
+		if (blockPos_1.getY() >= 1 && blockPos_1.getY() + height + 1 <= 256 && 
+				(this.isWaterFeature || !isWater(world, blockPos_1)) && 
+				((this.isBeachFeature && this.isSandOrClay(world, blockPos_1.down())) || super.isNaturalDirtOrGrass(world, blockPos_1.down())))
+		{
+			
+			this.generateBlocks(world, generator, height, rand, blockPos_1);
+			
+			return generator.generate(this);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	private boolean isSandOrClay(TestableWorld world, BlockPos down)
+	{
+		return world.testBlockState(down, (blockState_1) -> {
+			Block block_1 = blockState_1.getBlock();
+			return block_1 == Blocks.RED_SAND || block_1 == Blocks.SAND || block_1 == Blocks.CLAY;
+		});
+	}
+	
+	protected abstract void generateBlocks(ModifiableTestableWorld world, BlockGenerator generator, int height, Random rand, BlockPos pos);
+}
