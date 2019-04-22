@@ -43,36 +43,17 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
             {
                 for (int z = 0; z < 16; z++)
                 {
-                    double posX = x + chunk_1.getPos().getStartX();
-                    double posZ = z + chunk_1.getPos().getStartZ();
+                    int posX = x + chunk_1.getPos().getStartX();
+                    int posZ = z + chunk_1.getPos().getStartZ();
 
-                    // position based on height noise
-                    double posY = MIDLINE + heightNoise.eval(posX / 30, posZ / 30) * 6;
+                    double height = getTerrainScale(posX, posZ);
 
-                    // 0 - 1 number representing how far out we are from 0, 0
-                    double distanceScale = convertRange(
-                            Math.min(
-                                    1000,
-                                    getDistanceFrom(
-                                            0,
-                                            0,
-                                            (int) posX,
-                                            (int) posZ)
-                            ),
-                            0,
-                            1000,
-                            1,
-                            0
-                    );
-
-
-                    for (int y = 0; y < posY * distanceScale; y++)
+                    for (int y = 0; y < height; y++)
                     {
                         chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.STONE.getDefaultState(), false);
                     }
-
                     
-                    getBiome((int) posX, (int) posZ).buildSurface(new Random((long) (234612362L * posX + -8264616432452L * posZ)), chunk_1, (int) posX, (int) posZ, 255, blockNoise.eval(x, z), Blocks.STONE.getDefaultState(), Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
+                    getBiome(posX, posZ).buildSurface(new Random(234612362L * posX + -8264616432452L * posZ), chunk_1, posX, posZ, 255, blockNoise.eval(x, z), Blocks.STONE.getDefaultState(), Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
                 }
             }
         }
@@ -80,6 +61,26 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 
 
     public static Biome getBiome(int x, int z)
+    {
+        double finalY = getTerrainScale(x, z);
+
+        if(finalY < 57) return TropicalBiomes.TROPICAL_SEA;
+
+        else if(finalY <= 64)
+        {
+            double d = biomeNoise.eval(0.03D * x, 0.03D * z);
+            
+            if (d > 0)
+            	return TropicalBiomes.WHITE_SHORE;
+            else
+            	return TropicalBiomes.PALM_BEACH;
+        }
+
+        else return TropicalBiomes.DEFAULT;
+    }
+
+
+    private static double getTerrainScale(int x, int z)
     {
         // position based on height noise
         double posY = MIDLINE + heightNoise.eval(x / 30, z / 30) * 6;
@@ -100,22 +101,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
                 0
         );
 
-        double finalY = posY * distanceScale;
-
-
-        if(finalY < 57) return TropicalBiomes.TROPICAL_SEA;
-
-        else if(finalY <= 64)
-        {
-            double d = biomeNoise.eval(0.03D * x, 0.03D * z);
-            
-            if (d > 0)
-            	return TropicalBiomes.WHITE_SHORE;
-            else
-            	return TropicalBiomes.PALM_BEACH;
-        }
-
-        else return TropicalBiomes.DEFAULT;
+        return posY * distanceScale;
     }
 
     public static double convertRange(double value, double oldMin, double oldMax, double newMin, double newMax)
