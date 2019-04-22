@@ -13,6 +13,7 @@ public class TropicalIslandBiome extends TropicsBiome
 		this.theBiomePopulator.treesPerChunk = 2;
 		
 		this.theBiomePopulator.addTreeFeature(Feature.FANCY_TREE, 1);
+		this.theBiomePopulator.addTreeFeature(Feature.JUNGLE_GROUND_BUSH, 0.5F);
 		
 		this.theBiomePopulator.buildTreeFeatures();
 	}

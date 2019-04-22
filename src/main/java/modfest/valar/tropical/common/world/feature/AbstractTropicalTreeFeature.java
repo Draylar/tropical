@@ -16,13 +16,13 @@ import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
-public abstract class TreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifierTester
+public abstract class AbstractTropicalTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifierTester
 {
 	private final int heightMin;
 	private final int heightDelta;
 	private boolean isBeachFeature, isWaterFeature = false;
 	
-	public TreeFeature(boolean notify, int minHeight, int maxHeight)
+	public AbstractTropicalTreeFeature(boolean notify, int minHeight, int maxHeight)
 	{
 		super(DefaultFeatureConfig::deserialize, notify);
 		

@@ -2,7 +2,7 @@ package modfest.valar.tropical.util.noise;
 
 import java.util.function.DoubleFunction;
 
-public class OctaveNoiseGenerator implements NoiseGenerator, DoubleFunction<OctaveNoiseGenerator>
+public class OctaveNoiseGenerator implements Cloneable, NoiseGenerator, DoubleFunction<OctaveNoiseGenerator>
 {
     private SingleNoiseGenerator[] generators;
 
@@ -10,7 +10,9 @@ public class OctaveNoiseGenerator implements NoiseGenerator, DoubleFunction<Octa
 
     private final long seed;
     private final int octaves;
-
+    
+    private double appliedDouble = 1;
+    
     public OctaveNoiseGenerator(long seed, int octaves)
     {
         this.seed = seed;
@@ -102,8 +104,21 @@ public class OctaveNoiseGenerator implements NoiseGenerator, DoubleFunction<Octa
     {
         for (int i = 0; i < octaves; ++i)
             generators[i] = generators[i].apply(arg0 / Math.pow(2, i));
-
+        
+        this.appliedDouble = arg0;
+        
         return this;
+    }
+    
+    @Override
+    public OctaveNoiseGenerator clone()
+    {
+    	return new OctaveNoiseGenerator(this.getSeed(), this.octaves).apply(this.appliedDouble);
+    }
+    
+    public OctaveNoiseGenerator clone(long seedOffset)
+    {
+    	return new OctaveNoiseGenerator(this.getSeed() + seedOffset, this.octaves).apply(this.appliedDouble);
     }
 
 }

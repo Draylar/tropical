@@ -29,8 +29,8 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         SeedCache.setSeed(world.getSeed());
         this.random.consume(2620);
         heightNoise = new OctaveNoiseGenerator(world.getSeed(), 2);
-        blockNoise = new OctaveNoiseGenerator(world.getSeed(), 6).apply(0.12F);
-        biomeNoise = new OctaveNoiseGenerator(world.getSeed() + 23L, 1).apply(0.01F);
+        blockNoise = new OctaveNoiseGenerator(world.getSeed(), 6).apply(8D);
+        biomeNoise = new OctaveNoiseGenerator(world.getSeed() + 23L, 1).apply(15D);
     }
 
     @Override
@@ -77,7 +77,12 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         }
         else if(finalY <= 64)
         {
-            return TropicalBiomes.WHITE_SHORE;
+            double d = biomeNoise.eval(0.03D * x, 0.03D * z);
+            
+            if (d > 0)
+            	return TropicalBiomes.WHITE_SHORE;
+            else
+            	return TropicalBiomes.PALM_BEACH;
         }
         else
         {
