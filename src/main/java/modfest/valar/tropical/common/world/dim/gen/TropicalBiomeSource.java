@@ -11,6 +11,7 @@ import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import modfest.valar.tropical.common.TropicalBiomes;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.ChunkPos;
@@ -29,7 +30,7 @@ public class TropicalBiomeSource extends BiomeSource
 	@Override
 	public Biome getBiome(int x, int z)
 	{
-		return TropicalBiomes.TROPICAL_SEA;
+		return TropicalChunkGenerator.getBiome(x, z);
 	}
 
 	@Override
