@@ -2,6 +2,7 @@ package modfest.valar.tropical.common;
 
 import modfest.valar.tropical.TropicalMod;
 import modfest.valar.tropical.common.items.DebugTeleporterItem;
+import modfest.valar.tropical.common.items.FishSwordItem;
 import modfest.valar.tropical.common.items.MargaritaItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.FoodItemSetting;
@@ -19,6 +20,7 @@ public class TropicalItems
     public static final Item MARGARITA_GLASS = new Item(DEFAULT_SETTINGS);
     private static final Item MARGARITA_MAKER = new BlockItem(TropicalBlocks.MARGARITA_MAKER, DEFAULT_SETTINGS);
     private static final Item COCONUT = new Item(DEFAULT_SETTINGS);
+    private static final Item FISH_SWORD = new FishSwordItem(DEFAULT_SETTINGS);
 
     // food items
     private static final Item RAW_CRAB = new Item(DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(3).build()));
@@ -49,6 +51,7 @@ public class TropicalItems
         register(COCONUT_JUICE, "coconut_juice");
         register(SURF_AND_TURF, "surf_and_turf");
         register(TROPICAL_CORE, "tropical_core");
+        register(FISH_SWORD, "fish_sword");
     }
 
     private static void register(Item item, String name)

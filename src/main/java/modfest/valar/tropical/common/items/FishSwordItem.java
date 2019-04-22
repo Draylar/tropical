@@ -6,14 +6,14 @@ import net.minecraft.recipe.Ingredient;
 
 public class FishSwordItem extends SwordItem
 {
-    public FishSwordItem(int int_1, float float_1, Settings item$Settings_1)
+    public FishSwordItem(Settings item$Settings_1)
     {
         super(new ToolMaterial()
         {
             @Override
             public int getDurability()
             {
-                return 0;
+                return 750;
             }
 
             @Override
@@ -25,19 +25,19 @@ public class FishSwordItem extends SwordItem
             @Override
             public float getAttackDamage()
             {
-                return 0;
+                return 6;
             }
 
             @Override
             public int getMiningLevel()
             {
-                return 0;
+                return 1;
             }
 
             @Override
             public int getEnchantability()
             {
-                return 0;
+                return 15;
             }
 
             @Override
@@ -45,6 +45,6 @@ public class FishSwordItem extends SwordItem
             {
                 return null;
             }
-        }, int_1, float_1, item$Settings_1);
+        }, 1, 1, item$Settings_1);
     }
 }
