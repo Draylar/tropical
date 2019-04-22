@@ -50,14 +50,8 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
                     {
                         chunk_1.setBlockState(new BlockPos(x, y, z), Blocks.STONE.getDefaultState(), false);
                     }
-                }
-            }
-            
-            for (int x = 0; x < 16; x++)
-            {
-                for (int z = 0; z < 16; z++)
-                {
-                    getBiome(x, z).buildSurface(new Random(234612362L * x + -8264616432452L * z), chunk_1, x, z, 255, surfaceBlockNoise.eval(x, z), Blocks.STONE.getDefaultState(), Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
+                    
+                    getBiome((int) posX, (int) posZ).buildSurface(new Random((long) (234612362L * posX + -8264616432452L * posZ)), chunk_1, (int) posX, (int) posZ, 255, surfaceBlockNoise.eval(x, z), Blocks.STONE.getDefaultState(), Blocks.WATER.getDefaultState(), getSeaLevel(), world.getSeed());
                 }
             }
         }

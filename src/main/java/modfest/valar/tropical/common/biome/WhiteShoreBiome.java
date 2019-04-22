@@ -1,6 +1,15 @@
 package modfest.valar.tropical.common.biome;
 
+import java.util.Random;
+
+import modfest.valar.tropical.common.world.dim.gen.TropicsGenUtils;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
@@ -12,12 +21,16 @@ public class WhiteShoreBiome extends TropicsBiome
 		super(new Properties("white_shore", WHITE_SHORE_BUILDER));
 	}
 	
-	private static final SurfaceBuilder<TernarySurfaceConfig> WHITE_SHORE_BUILDER = new WhiteShoreBuilder();
+	private static final SurfaceBuilder<TernarySurfaceConfig> WHITE_SHORE_BUILDER;
+	private static final TernarySurfaceConfig WHITE_SHORE_BLOCKS = new TernarySurfaceConfig(Blocks.SAND.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.SAND.getDefaultState());
+	
+	static
+	{
+		WHITE_SHORE_BUILDER = Registry.register(Registry.SURFACE_BUILDER, "tropical:white_shore", new WhiteShoreBuilder());
+	}
 	
 	private static class WhiteShoreBuilder extends TropicalSurfaceBuilder
 	{
-		//TODO will be white sand
-		private static final TernarySurfaceConfig DEFAULT_CONFIG = new TernarySurfaceConfig(Blocks.SAND.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.SAND.getDefaultState());
 		
 		public WhiteShoreBuilder()
 		{
@@ -25,11 +38,12 @@ public class WhiteShoreBiome extends TropicsBiome
 		}
 
 		@Override
-		public TernarySurfaceConfig getSurfaceBlocks(double noise, long seed, int x, int z)
+		public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int worldHeight, double noise,
+				BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed,
+				TernarySurfaceConfig surfaceBlocks)
 		{
-			return DEFAULT_CONFIG;
+			TropicsGenUtils.generate(chunk, x, z, worldHeight, seaLevel, WHITE_SHORE_BLOCKS);
 		}
-		
 	}
 	
 }
