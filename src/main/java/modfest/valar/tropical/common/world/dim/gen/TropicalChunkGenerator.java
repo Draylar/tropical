@@ -64,7 +64,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 
     public static Biome getBiome(int x, int z)
     {
-        double posY = MIDLINE + simplexnoise.eval( x / 30,z / 30) * 6;
+        double posY = MIDLINE + simplexnoise.eval(x / 30, z / 30) * 6;
         double distanceFromOrigin = getDistanceFrom(0, 0, (int) x, (int) z);
         distanceFromOrigin = Math.min(1000, distanceFromOrigin);
 
@@ -85,7 +85,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 
         else
         {
-            return Biomes.FOREST;
+            return TropicalBiomes.DEFAULT;
         }
     }
 
