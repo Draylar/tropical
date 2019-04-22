@@ -47,7 +47,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
                     double posY = MIDLINE + heightNoise.eval(posX / 30, posZ / 30) * 6;
 
                     double distanceFromOrigin = getDistanceFrom(0, 0, (int) posX, (int) posZ);
-                    System.out.println(distanceFromOrigin);
+                    
                     distanceFromOrigin = Math.min(1000, distanceFromOrigin);
 
                     for (int y = 0; y < posY * convertRange(distanceFromOrigin, 0, 1000, 1, 0); y++)
@@ -70,10 +70,8 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 
         double range = convertRange(distanceFromOrigin, 0, 1000, 1, 0);
         double finalY = posY * range;
-
-        System.out.println(range);
         
-        if(finalY < 60)
+        if(finalY < 57)
         {
             return TropicalBiomes.TROPICAL_SEA;
         }
