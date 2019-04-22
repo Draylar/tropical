@@ -81,17 +81,29 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 
     public static Biome getBiome(int x, int z)
     {
+        // position based on height noise
         double posY = MIDLINE + heightNoise.eval(x / 30, z / 30) * 6;
-        double distanceFromOrigin = getDistanceFrom(0, 0, x, z);
-        distanceFromOrigin = Math.min(1000, distanceFromOrigin);
 
-        double range = convertRange(distanceFromOrigin, 0, 1000, 1, 0);
-        double finalY = posY * range;
-        
-        if(finalY < 57)
-        {
-            return TropicalBiomes.TROPICAL_SEA;
-        }
+        // 0 - 1 number representing how far out we are from 0, 0
+        double distanceScale = convertRange(
+                Math.min(
+                        1000,
+                        getDistanceFrom(
+                                0,
+                                0,
+                                x,
+                                z)
+                ),
+                0,
+                1000,
+                1,
+                0
+        );
+
+        double finalY = posY * distanceScale;
+
+
+        if(finalY < 57) return TropicalBiomes.TROPICAL_SEA;
 
         else if(finalY <= 64)
         {
@@ -102,10 +114,8 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
             else
             	return TropicalBiomes.PALM_BEACH;
         }
-        else
-        {
-            return TropicalBiomes.DEFAULT;
-        }
+
+        else return TropicalBiomes.DEFAULT;
     }
 
     public static double convertRange(double value, double oldMin, double oldMax, double newMin, double newMax)
