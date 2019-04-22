@@ -24,7 +24,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
     public TropicalChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
         super(world, biomeSource_1, 4, 8, 256, config, true);
         this.random.consume(2620);
-        simplexnoise = new OpenSimplexNoise();
+        simplexnoise = new OctaveNoiseGenerator(0, 0);
     }
 
     @Override
