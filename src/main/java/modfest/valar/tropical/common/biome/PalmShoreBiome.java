@@ -19,11 +19,9 @@ public class PalmShoreBiome extends TropicsBiome
 	{
 		super(new Properties("palm_beach", PALM_BEACH_BUILDER));
 		
-		this.theBiomePopulator.extraTreeChance = 0.5F;
-		
-		this.theBiomePopulator.addTreeFeature(TropicalFeatures.COCONUT_PALM, 1);
-		
-		this.theBiomePopulator.buildTreeFeatures();
+		this.biomePopulator.extraTreeChance = 0.5F;
+		this.biomePopulator.addTreeFeature(TropicalFeatures.COCONUT_PALM, 1);
+		this.biomePopulator.buildTreeFeatures();
 	}
 	
 	public static final SurfaceBuilder<TernarySurfaceConfig> PALM_BEACH_BUILDER;

@@ -10,12 +10,12 @@ public class TropicalIslandBiome extends TropicsBiome
 	{
 		super(new Properties("tropical_island", SurfaceBuilder.DEFAULT));
 		
-		this.theBiomePopulator.treesPerChunk = 2;
+		this.biomePopulator.treesPerChunk = 2;
 		
-		this.theBiomePopulator.addTreeFeature(Feature.FANCY_TREE, 1);
-		this.theBiomePopulator.addTreeFeature(Feature.JUNGLE_GROUND_BUSH, 0.5F);
+		this.biomePopulator.addTreeFeature(Feature.FANCY_TREE, 1);
+		this.biomePopulator.addTreeFeature(Feature.JUNGLE_GROUND_BUSH, 0.5F);
 		
-		this.theBiomePopulator.buildTreeFeatures();
+		this.biomePopulator.buildTreeFeatures();
 	}
 	
 }

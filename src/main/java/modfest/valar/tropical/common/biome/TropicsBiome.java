@@ -15,14 +15,14 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 public abstract class TropicsBiome extends Biome
 {
 	private final String id;
-	protected final BiomePopulator theBiomePopulator;
+	protected final BiomePopulator biomePopulator;
 	
 	protected TropicsBiome(Properties properties)
 	{
 		super(properties.build());
 		
 		this.id = properties.getId();
-		theBiomePopulator = new BiomePopulator(this);
+		biomePopulator = new BiomePopulator(this);
 	}
 	
 	public String getId()
