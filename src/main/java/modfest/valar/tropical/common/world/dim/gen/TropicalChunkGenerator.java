@@ -3,6 +3,7 @@ package modfest.valar.tropical.common.world.dim.gen;
 import java.util.Random;
 
 import modfest.valar.tropical.common.TropicalBiomes;
+import modfest.valar.tropical.util.SeedCache;
 import modfest.valar.tropical.util.noise.NoiseGenerator;
 import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
 import net.minecraft.block.Blocks;
@@ -24,9 +25,10 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 
     public TropicalChunkGenerator(IWorld world, BiomeSource biomeSource_1, ChunkGeneratorConfig config) {
         super(world, biomeSource_1, 4, 8, 256, config, true);
+        SeedCache.setSeed(world.getSeed());
         this.random.consume(2620);
         simplexnoise = new OctaveNoiseGenerator(world.getSeed(), 2);
-        surfaceBlockNoise = new OctaveNoiseGenerator(0, 6).apply(0.2F);
+        surfaceBlockNoise = new OctaveNoiseGenerator(0, 6).apply(0.12F);
     }
 
     @Override
@@ -69,16 +71,14 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 
         System.out.println(range);
 
-        if(finalY <= 50)
+        if(finalY < 60)
         {
             return TropicalBiomes.TROPICAL_SEA;
         }
-
-        if(finalY <= 65)
+        else if(finalY <= 64)
         {
             return TropicalBiomes.WHITE_SHORE;
         }
-
         else
         {
             return TropicalBiomes.DEFAULT;
