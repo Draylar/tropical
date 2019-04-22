@@ -1,4 +1,16 @@
 {
     "block.tropical.white_sand": "White Sand",
-    "item.tropical.debug_teleporter": "Staff of the Ocean King"
+    "item.tropical.debug_teleporter": "Staff of the Ocean King",
+    "item.tropical.raw_crab": "Raw Crab",
+    "item.tropical.seared_crab": "Seared Crab",
+    "item.tropical.banana": "Banana",
+    "item.tropical.pineapple": "Pineapple",
+    "item.tropical.fish_stew": "Fish Stew",
+    "item.tropical.sword_fish_spawn_egg": "Sword Fish Spawn Egg",
+    "item.tropical.coconut_juice": "Coconut Juice",
+    "item.tropical.surf_and_turf": "Surf n' Turf",
+    "item.tropical.margarita": "Margarita",
+    "item.tropical.ice_cubes": "Ice Cubes",
+    "item.tropical.margarita_glass": "Margarita Glass",
+    "item.tropical.margarita_maker": "Margarita Maker"
 }

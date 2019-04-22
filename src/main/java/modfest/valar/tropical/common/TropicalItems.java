@@ -6,6 +6,7 @@ import modfest.valar.tropical.common.items.MargaritaItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.FoodItemSetting;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.registry.Registry;
 
 public class TropicalItems
@@ -17,10 +18,19 @@ public class TropicalItems
     public static final Item ICE_CUBES = new Item(DEFAULT_SETTINGS);
     public static final Item MARGARITA_GLASS = new Item(DEFAULT_SETTINGS);
     private static final Item MARGARITA_MAKER = new BlockItem(TropicalBlocks.MARGARITA_MAKER, DEFAULT_SETTINGS);
+    private static final Item COCONUT = new Item(DEFAULT_SETTINGS);
+
+    // food items
     private static final Item RAW_CRAB = new Item(DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(3).build()));
     private static final Item SEARED_CRAB = new Item(DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(6).build()));
     private static final Item BANANA = new Item(DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(2).eatenFast().build()));
     private static final Item PINEAPPLE = new Item(DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(3).build()));
+    private static final Item FISH_STEW = new Item(DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(10).build()));
+    private static final Item SWORD_FISH_SPAWN_EGG = new SpawnEggItem(TropicalEntities.SWORD_FISH, 0x6d9ce8, 0xced8e8, DEFAULT_SETTINGS);
+    private static final Item COCONUT_JUICE = new Item(DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(3).build()));
+    private static final Item SURF_AND_TURF = new Item(DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(10).build()));
+    private static final Item TROPICAL_CORE = new Item(DEFAULT_SETTINGS);
+
 
     public static void register()
     {
@@ -33,6 +43,12 @@ public class TropicalItems
         register(SEARED_CRAB, "seared_crab");
         register(BANANA, "banana");
         register(PINEAPPLE, "pineapple");
+        register(FISH_STEW, "fish_stew");
+        register(SWORD_FISH_SPAWN_EGG, "sword_fish_spawn_egg");
+        register(COCONUT, "coconut");
+        register(COCONUT_JUICE, "coconut_juice");
+        register(SURF_AND_TURF, "surf_and_turf");
+        register(TROPICAL_CORE, "tropical_core");
     }
 
     private static void register(Item item, String name)
