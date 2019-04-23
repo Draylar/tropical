@@ -30,7 +30,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         super(world, biomeSource_1, 4, 8, 256, config, true);
         this.random.consume(2620);
 
-        heightNoise = new OctaveNoiseGenerator(world.getSeed(), 2);
+        heightNoise = new OctaveNoiseGenerator(world.getSeed(), 2).apply(30D);
         blockNoise = new OctaveNoiseGenerator(world.getSeed(), 6).apply(8D);
         biomeNoise = new OctaveNoiseGenerator(world.getSeed() + 23L, 1).apply(15D);
     }
@@ -83,10 +83,10 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         double noiseHeight;
         if(getDistanceFromOrigin(x, z) < 300)
         {
-            noiseHeight = heightNoise.eval(x / 30, z / 30) * 7;
+            noiseHeight = heightNoise.eval(x, z) * 7;
         }
 
-        else noiseHeight = heightNoise.eval(x / 30, z / 30) * 3;
+        else noiseHeight = heightNoise.eval(x, z) * 3;
 
         double posY = (MIDLINE  + noiseHeight) * (1 - Math.min(1000, getDistanceFromOrigin(x, z)) / 1000);
 
