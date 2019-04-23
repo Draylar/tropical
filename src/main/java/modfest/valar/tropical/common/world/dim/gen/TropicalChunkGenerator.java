@@ -81,11 +81,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
     private static double getTerrainScale(double x, double z)
     {
         double noiseHeight;
-        if(getDistanceFromOrigin(x, z) < 300)
-        {
-            noiseHeight = heightNoise.eval(x, z) * 7;
-        }
-
+        if(getDistanceFromOrigin(x, z) < 350) noiseHeight = heightNoise.eval(x, z) * 40;
         else noiseHeight = heightNoise.eval(x, z) * 3;
 
         double posY = (MIDLINE  + noiseHeight) * (1 - Math.min(1000, getDistanceFromOrigin(x, z)) / 1000);

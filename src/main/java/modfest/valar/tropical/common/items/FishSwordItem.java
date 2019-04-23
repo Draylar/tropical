@@ -25,7 +25,7 @@ public class FishSwordItem extends SwordItem
             @Override
             public float getAttackDamage()
             {
-                return 6;
+                return 5;
             }
 
             @Override

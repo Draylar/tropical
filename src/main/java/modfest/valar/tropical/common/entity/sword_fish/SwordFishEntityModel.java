@@ -2,7 +2,6 @@ package modfest.valar.tropical.common.entity.sword_fish;
 
 import net.minecraft.client.model.Cuboid;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.entity.Entity;
 
 public class SwordFishEntityModel extends EntityModel<SwordFishEntity>
 {
@@ -13,6 +12,10 @@ public class SwordFishEntityModel extends EntityModel<SwordFishEntity>
     private final Cuboid backfin;
     private final Cuboid front;
     private final Cuboid topfin;
+
+
+    private float tailRotation = 0;
+    private boolean tailDirection = true;
 
     public SwordFishEntityModel() {
         textureWidth = 48;
@@ -93,6 +96,22 @@ public class SwordFishEntityModel extends EntityModel<SwordFishEntity>
     @Override
     public void render(SwordFishEntity entity_1, float float_1, float float_2, float float_3, float float_4, float float_5, float float_6)
     {
+        tail.yaw = tailRotation;
+
+        // back tail
+        if(tailDirection)
+        {
+            tailRotation += 0.01;
+            if(tailRotation > .4) tailDirection = false;
+        }
+
+        else
+        {
+            tailRotation -= 0.01;
+            if(tailRotation < -.4) tailDirection = true;
+        }
+
+
         bone.render(.1f);
     }
 }
