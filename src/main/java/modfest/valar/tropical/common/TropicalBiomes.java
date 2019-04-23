@@ -3,6 +3,7 @@ package modfest.valar.tropical.common;
 import java.util.Set;
 
 import modfest.valar.tropical.common.biome.PalmShoreBiome;
+import modfest.valar.tropical.common.biome.RockyShoreBiome;
 import modfest.valar.tropical.common.biome.TropicalIslandBiome;
 import modfest.valar.tropical.common.biome.TropicalSeaBiome;
 import modfest.valar.tropical.common.biome.WhiteShoreBiome;
@@ -15,6 +16,7 @@ public class TropicalBiomes
 	
 	public static final Biome WHITE_SHORE = BiomeRegistry.register(new WhiteShoreBiome());
 	public static final Biome PALM_BEACH = BiomeRegistry.register(new PalmShoreBiome());
+	public static final Biome ROCKY_SHORE = BiomeRegistry.register(new RockyShoreBiome());
 	
 	public static final Biome DEFAULT = BiomeRegistry.register(new TropicalIslandBiome());
 	

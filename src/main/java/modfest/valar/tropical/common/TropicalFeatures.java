@@ -1,6 +1,7 @@
 package modfest.valar.tropical.common;
 
 import modfest.valar.tropical.TropicalMod;
+import modfest.valar.tropical.common.world.feature.BeachSpikeFeature;
 import modfest.valar.tropical.common.world.feature.OceanSpikeFeature;
 import modfest.valar.tropical.common.world.feature.PalmCoconutFeature;
 import net.minecraft.util.registry.Registry;
@@ -11,6 +12,7 @@ public class TropicalFeatures
 {
 	public static final Feature<DefaultFeatureConfig> COCONUT_PALM;
 	public static final Feature<DefaultFeatureConfig> OCEAN_SPIKE;
+	public static final Feature<DefaultFeatureConfig> BEACH_ROCK;
 	
 	private static Feature<DefaultFeatureConfig> register(Feature<DefaultFeatureConfig> feature, String name)
 	{
@@ -21,6 +23,7 @@ public class TropicalFeatures
 	
 	static
 	{
+		BEACH_ROCK = register(new BeachSpikeFeature(), "beach_spike");
 		COCONUT_PALM = register(new PalmCoconutFeature(false), "coconut_palm");
 		OCEAN_SPIKE = register(new OceanSpikeFeature(DefaultFeatureConfig::deserialize), "ocean_spike");
 	}

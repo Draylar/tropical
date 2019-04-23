@@ -8,6 +8,7 @@ import modfest.valar.tropical.util.gen.PublicWorldModifierTester;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
@@ -20,7 +21,7 @@ public abstract class AbstractTropicalTreeFeature extends AbstractTreeFeature<De
 {
 	private final int heightMin;
 	private final int heightDelta;
-	private boolean isBeachFeature, isWaterFeature = false;
+	private boolean isBeachFeature, isWaterFeature, isStoneResistant = false;
 	
 	public AbstractTropicalTreeFeature(boolean notify, int minHeight, int maxHeight)
 	{
@@ -33,6 +34,11 @@ public abstract class AbstractTropicalTreeFeature extends AbstractTreeFeature<De
 	protected void setBeachFeature()
 	{
 		this.isBeachFeature = true;
+	}
+	
+	protected void setStoneResistant()
+	{
+		this.isStoneResistant = true;
 	}
 	
 	protected void setWaterFeature()
@@ -70,7 +76,7 @@ public abstract class AbstractTropicalTreeFeature extends AbstractTreeFeature<De
 		
 		if (blockPos_1.getY() >= 1 && blockPos_1.getY() + height + 1 <= 256 && 
 				(this.isWaterFeature || !isWater(world, blockPos_1)) && 
-				((this.isBeachFeature && this.isSandOrClay(world, blockPos_1.down())) || super.isNaturalDirtOrGrass(world, blockPos_1.down())))
+				((this.isBeachFeature && this.isSandOrClay(world, blockPos_1.down())) || (this.isStoneResistant && this.isStone(world, blockPos_1.down())) || super.isNaturalDirtOrGrass(world, blockPos_1.down())))
 		{
 			
 			this.generateBlocks(world, generator, height, rand, blockPos_1);
@@ -88,6 +94,13 @@ public abstract class AbstractTropicalTreeFeature extends AbstractTreeFeature<De
 		return world.testBlockState(down, (blockState_1) -> {
 			Block block_1 = blockState_1.getBlock();
 			return block_1 == Blocks.RED_SAND || block_1 == Blocks.SAND || block_1 == Blocks.CLAY;
+		});
+	}
+	
+	private boolean isStone(TestableWorld world, BlockPos down)
+	{
+		return world.testBlockState(down, (blockState_1) -> {
+			return blockState_1.getMaterial() == Material.STONE;
 		});
 	}
 	

@@ -20,7 +20,7 @@ public class TropicsGenUtils
 
 			if (b == Blocks.STONE)
 			{
-				if (j1 < seaLevel) chunk.setBlockState(new BlockPos(x1, j1, z1), surfaceBlocks.getUnderwaterMaterial(), false);
+				if (j1 < seaLevel - 1) chunk.setBlockState(new BlockPos(x1, j1, z1), surfaceBlocks.getUnderwaterMaterial(), false);
 				else
 				{
 					Block b1;

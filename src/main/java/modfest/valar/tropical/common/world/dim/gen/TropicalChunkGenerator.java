@@ -45,7 +45,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
             {
                 int posX = x + chunk_1.getPos().getStartX();
                 int posZ = z + chunk_1.getPos().getStartZ();
-
+                
                 double height = getTerrainScale(posX, posZ);
 
                 for (int y = 0; y < height; y++)
@@ -69,7 +69,9 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         {
             double d = biomeNoise.eval(0.5D * x, 0.5D * z);
             
-            if (d > 0)
+            if (d > 0.75D || d < -0.75D)
+            	return TropicalBiomes.ROCKY_SHORE;
+            else if (d > 0)
             	return TropicalBiomes.WHITE_SHORE;
             else
             	return TropicalBiomes.PALM_BEACH;
@@ -88,7 +90,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
     	System.out.println(MathUtils.sigmoid(400D - 200, 31.5D, 2.5D, 0.02D, -200D));
     	System.out.println(MathUtils.sigmoid(400D - 400, 31.5D, 2.5D, 0.02D, -200D));
     }
-
+    
     private static double getTerrainScale(double x, double z)
     {
         double noiseHeight;
