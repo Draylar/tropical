@@ -20,10 +20,9 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
 {
 
     // use a map to determine where peaks are, and a map to determine how tall they are
-    private static NoiseGenerator heightNoise = new OctaveNoiseGenerator(0, 2);
+    private static NoiseGenerator heightNoise;
     private static NoiseGenerator blockNoise;
     private static NoiseGenerator biomeNoise;
-    private static OpenSimplexNoise openSimplexNoise;
 
     private static final double MIDLINE = 100;
 
@@ -34,7 +33,6 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         heightNoise = new OctaveNoiseGenerator(world.getSeed(), 2);
         blockNoise = new OctaveNoiseGenerator(world.getSeed(), 6).apply(8D);
         biomeNoise = new OctaveNoiseGenerator(world.getSeed() + 23L, 1).apply(15D);
-        openSimplexNoise = new OpenSimplexNoise();
     }
 
     @Override
@@ -85,10 +83,10 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         double noiseHeight;
         if(getDistanceFromOrigin(x, z) < 300)
         {
-            noiseHeight = openSimplexNoise.eval(x / 30, z / 30) * 7;
+            noiseHeight = heightNoise.eval(x / 30, z / 30) * 7;
         }
 
-        else noiseHeight = openSimplexNoise.eval(x / 30, z / 30) * 3;
+        else noiseHeight = heightNoise.eval(x / 30, z / 30) * 3;
 
         double posY = (MIDLINE  + noiseHeight) * (1 - Math.min(1000, getDistanceFromOrigin(x, z)) / 1000);
 
