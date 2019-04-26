@@ -5,7 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import modfest.valar.tropical.common.world.dim.biomesource.BiomePopulator;
+import modfest.valar.tropical.common.world.biomesource.BiomePopulator;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;

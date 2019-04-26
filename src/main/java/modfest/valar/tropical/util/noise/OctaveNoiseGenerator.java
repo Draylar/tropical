@@ -110,6 +110,16 @@ public class OctaveNoiseGenerator implements Cloneable, NoiseGenerator, DoubleFu
         return this;
     }
     
+    public OctaveNoiseGenerator tweak(double arg0)
+    {
+        for (int i = 0; i < octaves; ++i)
+            generators[i] = generators[i].apply((arg0 * this.appliedDouble) / Math.pow(2, i));
+        
+        this.appliedDouble *= arg0;
+        
+        return this;
+    }
+    
     @Override
     public OctaveNoiseGenerator clone()
     {

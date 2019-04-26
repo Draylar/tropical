@@ -1,10 +1,10 @@
 package modfest.valar.tropical.common.world.dim.gen;
 
-import modfest.valar.tropical.common.TropicalBiomes;
-import modfest.valar.tropical.util.SeedCache;
+import java.util.Random;
+
+import modfest.valar.tropical.common.world.biomesource.TropicalBiomeSource;
 import modfest.valar.tropical.util.noise.NoiseGenerator;
 import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
-import modfest.valar.tropical.util.noise.OpenSimplexNoise;
 import modfest.valar.tropical.util.properties.MathUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -14,8 +14,6 @@ import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.SurfaceChunkGenerator;
-
-import java.util.Random;
 
 public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGeneratorConfig>
 {
@@ -62,22 +60,8 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
     public static Biome getBiome(int x, int z)
     {
         double finalY = getTerrainScale(x, z);
-
-        if(finalY < 57) return TropicalBiomes.TROPICAL_SEA;
-
-        else if(finalY <= 64)
-        {
-            double d = biomeNoise.eval(0.5D * x, 0.5D * z);
-            
-            if (d > 0.75D || d < -0.75D)
-            	return TropicalBiomes.ROCKY_SHORE;
-            else if (d > 0)
-            	return TropicalBiomes.WHITE_SHORE;
-            else
-            	return TropicalBiomes.PALM_BEACH;
-        }
-
-        else return TropicalBiomes.DEFAULT;
+        
+        return TropicalBiomeSource.buildBiomes(x, z, (int) finalY, (OctaveNoiseGenerator) biomeNoise);
     }
     
     static

@@ -1,4 +1,4 @@
-package modfest.valar.tropical.common.world.dim.biomesource;
+package modfest.valar.tropical.common.world.biomesource;
 
 import java.util.List;
 import java.util.Random;
@@ -9,10 +9,14 @@ import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import modfest.valar.tropical.common.TropicalBiomes;
+import modfest.valar.tropical.common.world.biomesource.layer.AddBeachVariantsLayer;
+import modfest.valar.tropical.common.world.biomesource.layer.AddIslandVariantsLayer;
+import modfest.valar.tropical.common.world.biomesource.layer.SetIslandSectionsLayer;
+import modfest.valar.tropical.common.world.biomesource.layer.TropicalSampler;
 import modfest.valar.tropical.common.world.dim.gen.TropicalChunkGenerator;
+import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.ChunkPos;
@@ -22,7 +26,8 @@ import net.minecraft.world.gen.feature.StructureFeature;
 public class TropicalBiomeSource extends BiomeSource
 {
 	private Biome[] allowedBiomes;
-
+	private static TropicalSampler islandSampler = new SetIslandSectionsLayer();
+	
 	public TropicalBiomeSource()
 	{
 		this.allowedBiomes = TropicalBiomes.asBiomeArray();
@@ -139,6 +144,18 @@ public class TropicalBiomeSource extends BiomeSource
 		}
 
 		return this.topMaterials;
+	}
+
+	public static Biome buildBiomes(int x, int z, int finalY, OctaveNoiseGenerator biomeNoise)
+	{
+		Biome biome = TropicalBiomes.DEFAULT;
+		
+		biome = islandSampler.sample(x, z, finalY, biomeNoise);
+		
+		biome = AddBeachVariantsLayer.INSTANCE.sample(islandSampler, biomeNoise.clone().tweak(1.2D), x, z, finalY);
+		biome = AddIslandVariantsLayer.INSTANCE.sample(islandSampler, biomeNoise.clone().tweak(0.8D), x, z, finalY);
+		
+		return biome;
 	}
 
 }

@@ -1,4 +1,4 @@
-package modfest.valar.tropical.common.world.dim.biomesource;
+package modfest.valar.tropical.common.world.biomesource;
 
 import java.util.ArrayList;
 import java.util.List;
