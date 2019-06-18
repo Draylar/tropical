@@ -17,7 +17,7 @@ public class FishSwordItem extends SwordItem
             }
 
             @Override
-            public float getBlockBreakingSpeed()
+            public float getMiningSpeed()
             {
                 return 0;
             }

@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tropical:item/margarita_overlay",
+    "layer1": "tropical:item/margarita_glass"
+  }
+}

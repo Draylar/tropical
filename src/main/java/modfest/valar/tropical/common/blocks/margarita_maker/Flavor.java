@@ -2,9 +2,9 @@ package modfest.valar.tropical.common.blocks.margarita_maker;
 
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.StringIdentifiable;
 
-public enum Flavor implements StringRepresentable
+public enum Flavor implements StringIdentifiable
 {
     BANANA("banana", new StatusEffectInstance(StatusEffects.JUMP_BOOST, 20 * 60 * 2, 1)),
     PLAIN("plain", null),

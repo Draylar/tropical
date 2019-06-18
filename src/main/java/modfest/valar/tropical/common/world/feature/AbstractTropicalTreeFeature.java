@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.ModifiableWorld;
@@ -49,8 +50,9 @@ public abstract class AbstractTropicalTreeFeature extends AbstractTreeFeature<De
 	@Override
 	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state)
 	{
-		super.setBlockState(set, world, pos, state);
+		super.setBlockState(set, world, pos, state, new MutableIntBoundingBox());
 	}
+
 
 	@Override
 	public void setWorldBlockState(Set<BlockPos> set, ModifiableTestableWorld world, BlockPos pos, BlockState state)
@@ -62,11 +64,11 @@ public abstract class AbstractTropicalTreeFeature extends AbstractTreeFeature<De
 			Block block = blockState_1.getBlock();
 			return block != Blocks.GRASS_BLOCK && block != Blocks.DIRT && block != Blocks.COARSE_DIRT;
 		}))
-				super.setBlockState(set, world, pos, state);
+				super.setBlockState(set, world, pos, state, new MutableIntBoundingBox());
 	}
 
 	@Override
-	protected boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random rand, BlockPos blockPos_1)
+	protected boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random rand, BlockPos blockPos_1, MutableIntBoundingBox mutableIntBoundingBox)
 	{
 		int height = heightMin + rand.nextInt(heightDelta);
 		

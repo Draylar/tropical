@@ -10,7 +10,6 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.Hand;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +25,7 @@ public class MargaritaMakerBlockEntity extends BlockEntity implements Tickable
 
     private ItemStack outputStack = ItemStack.EMPTY;
 
-    private EnumProperty<Flavor> FLAVOR = EnumProperty.create("flavor", Flavor.class);
+    private EnumProperty<Flavor> FLAVOR = EnumProperty.of("flavor", Flavor.class);
 
     public MargaritaMakerBlockEntity()
     {
@@ -36,7 +35,7 @@ public class MargaritaMakerBlockEntity extends BlockEntity implements Tickable
     void activate(BlockState state, World world, BlockPos pos, PlayerEntity playerEntity, Hand hand, BlockHitResult hitResult)
     {
         ItemStack stack = playerEntity.getMainHandStack();
-        int count = stack.getAmount();
+        int count = stack.getCount();
 
         if (stack.getItem() == TropicalItems.ICE_CUBES)
         {
@@ -48,7 +47,7 @@ public class MargaritaMakerBlockEntity extends BlockEntity implements Tickable
                 else break;
             }
 
-            stack.subtractAmount(changedCount);
+            stack.decrement(changedCount);
             iceCubeCount += changedCount;
         }
 
@@ -62,7 +61,7 @@ public class MargaritaMakerBlockEntity extends BlockEntity implements Tickable
                 else break;
             }
 
-            stack.subtractAmount(changedCount);
+            stack.decrement(changedCount);
             glassCount += changedCount;
         }
 

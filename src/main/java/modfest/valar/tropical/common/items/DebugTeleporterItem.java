@@ -19,7 +19,7 @@ public class DebugTeleporterItem extends Item
     @Override
     public TypedActionResult<ItemStack> use(World world_1, PlayerEntity playerEntity_1, Hand hand_1)
     {
-        if(!world_1.isClient && hand_1 == Hand.MAIN)
+        if(!world_1.isClient && hand_1 == Hand.MAIN_HAND)
         {
             if(playerEntity_1.dimension == TropicalMod.TROPICAL_DIMENSION) playerEntity_1.changeDimension(DimensionType.OVERWORLD);
             else playerEntity_1.changeDimension(TropicalMod.TROPICAL_DIMENSION);

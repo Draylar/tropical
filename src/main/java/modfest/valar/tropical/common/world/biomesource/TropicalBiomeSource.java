@@ -17,9 +17,9 @@ import modfest.valar.tropical.common.world.dim.gen.TropicalChunkGenerator;
 import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
-import net.minecraft.world.chunk.ChunkPos;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 //TODO everything lmao

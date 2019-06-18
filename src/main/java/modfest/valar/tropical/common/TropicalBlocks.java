@@ -49,7 +49,7 @@ public class TropicalBlocks
     	
     	public void registerItemBlock(ItemGroup group)
     	{
-    		Registry.register(Registry.ITEM, this.name, new BlockItem(this.block, new Item.Settings().itemGroup(group)));
+    		Registry.register(Registry.ITEM, this.name, new BlockItem(this.block, new Item.Settings().group(group)));
     	}
     }
 }

@@ -1,9 +1,11 @@
 package modfest.valar.tropical.common.world.feature;
 
 import java.util.Random;
+import java.util.Set;
 
 import modfest.valar.tropical.util.gen.BlockGenerator;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.ModifiableTestableWorld;
 
 public class PalmCoconutFeature extends AbstractPalmFeature
@@ -84,4 +86,9 @@ public class PalmCoconutFeature extends AbstractPalmFeature
 		else return 0;
 	}
 
+	@Override
+	protected boolean generate(Set<BlockPos> set, ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, MutableIntBoundingBox mutableIntBoundingBox)
+	{
+		return false;
+	}
 }

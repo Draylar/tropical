@@ -5,6 +5,9 @@
   "mixins": [
     "MixinPortalForcer"
   ],
+  "client": [
+    "MargaritaColorMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

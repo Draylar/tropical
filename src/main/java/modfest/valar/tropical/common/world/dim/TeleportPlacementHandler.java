@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.HashSet;
 
@@ -21,7 +22,7 @@ public class TeleportPlacementHandler
     }
 
     public static void leaveDimension(Entity entity, ServerWorld previousWorld, ServerWorld newWorld){
-        BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
+        BlockPos spawnLocation = newWorld.getSpawnPos();
 
         if (spawnLocation == null) {
             spawnLocation = newWorld.getSpawnPos();
@@ -30,16 +31,6 @@ public class TeleportPlacementHandler
         setEntityLocation(entity, spawnLocation);
     }
 
-
-    public static BlockPos getBedLocation(PlayerEntity player, ServerWorld world) {
-        BlockPos bedLocation = player.getSpawnPosition();
-        if (bedLocation == null) {
-            return null;
-        }
-        //method_7288 = getBedSpawn
-        BlockPos bedSpawnLocation = PlayerEntity.method_7288(world, bedLocation, false);
-        return bedSpawnLocation;
-    }
 
     public static void setEntityLocation(Entity entity, BlockPos pos) {
         if (entity instanceof ServerPlayerEntity) {
