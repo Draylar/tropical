@@ -41,11 +41,7 @@ public class MargaritaItem extends Item
     public static ItemStack createMargarita(Flavor flavor)
     {
         ItemStack stack = new ItemStack(TropicalItems.MARGARITA);
-
-        if (stack.hasTag())
-        {
-            stack.getTag().putString("flavor", flavor.asString());
-        }
+        stack.getOrCreateTag().putString("flavor", flavor.name());
 
         return stack;
     }
