@@ -1,18 +1,18 @@
-# Fabric Example Mod
+# Tropical (name up for discussion)
+Tropical is a mod that brings you to your paradise. Margaritas? Beach chairs? Relaxation as you eat a skewer of meat? We got you covered.
 
-Draylar's fork of the fabric-example-mod. Changes package structure to my usual one.
 
 ## Setup
 
-1. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-2. Run the following command:
+1. Fork project
+2. Clone to your IDE
+3. Edit as you see fit, and run like any other project
+4. PR changes when appropriate
 
-```
-./gradlew idea
-```
+
+
+
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This project is licensed under GPLv3. Feel free to include it in modpacks or use our code as you see fit 
