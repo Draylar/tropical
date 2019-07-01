@@ -32,7 +32,7 @@ dependencies {
 	//Fabric api
 	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0+build.185"
 	
-	modApi "valarlib:valar:lib:1.0.0"
+	modApi "valarlib:valar:lib:1.1.2"
 }
 
 // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
