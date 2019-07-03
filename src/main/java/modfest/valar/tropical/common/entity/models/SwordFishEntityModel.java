@@ -1,5 +1,6 @@
-package modfest.valar.tropical.common.entity.sword_fish;
+package modfest.valar.tropical.common.entity.models;
 
+import modfest.valar.tropical.common.entity.SwordFishEntity;
 import net.minecraft.client.model.Cuboid;
 import net.minecraft.client.render.entity.model.EntityModel;
 

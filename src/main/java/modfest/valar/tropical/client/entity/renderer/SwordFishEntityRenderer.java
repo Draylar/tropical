@@ -1,5 +1,7 @@
-package modfest.valar.tropical.common.entity.sword_fish;
+package modfest.valar.tropical.client.entity.renderer;
 
+import modfest.valar.tropical.common.entity.models.SwordFishEntityModel;
+import modfest.valar.tropical.common.entity.SwordFishEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
