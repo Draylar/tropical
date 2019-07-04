@@ -12,5 +12,22 @@
     "item.tropical.margarita": "Margarita",
     "item.tropical.ice_cubes": "Ice Cubes",
     "item.tropical.margarita_glass": "Margarita Glass",
-    "item.tropical.margarita_maker": "Margarita Maker"
+    "item.tropical.margarita_maker": "Margarita Maker",
+
+    "block.tropical.white_lounge_chair": "White Lounge Chair",
+    "block.tropical.orange_lounge_chair": "Orange Lounge Chair",
+    "block.tropical.magenta_lounge_chair": "Magenta Lounge Chair",
+    "block.tropical.light_blue_lounge_chair": "Light Blue Lounge Chair",
+    "block.tropical.yellow_lounge_chair": "Yellow Lounge Chair",
+    "block.tropical.lime_lounge_chair": "Lime Lounge Chair",
+    "block.tropical.pink_lounge_chair": "Pink Lounge Chair",
+    "block.tropical.gray_lounge_chair": "Gray Lounge Chair",
+    "block.tropical.light_gray_lounge_chair": "Light Gray Lounge Chair",
+    "block.tropical.cyan_lounge_chair": "Cyan Lounge Chair",
+    "block.tropical.purple_lounge_chair": "Purple Lounge Chair",
+    "block.tropical.blue_lounge_chair": "Blue Lounge Chair",
+    "block.tropical.brown_lounge_chair": "Brown Lounge Chair",
+    "block.tropical.green_lounge_chair": "Green Lounge Chair",
+    "block.tropical.red_lounge_chair": "Red Lounge Chair",
+    "block.tropical.black_lounge_chair": "Black Lounge Chair"
 }
