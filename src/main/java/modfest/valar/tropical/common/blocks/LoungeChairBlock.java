@@ -3,6 +3,7 @@ package modfest.valar.tropical.common.blocks;
 import modfest.valar.tropical.common.entity.LoungeChairBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.BlockRenderLayer;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -30,6 +31,11 @@ public class LoungeChairBlock extends BlockWithEntity
     public BlockRenderType getRenderType(BlockState blockState_1)
     {
         return BlockRenderType.MODEL;
+    }
+    
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Environment(EnvType.CLIENT)

@@ -1,3 +1,6 @@
 {
-  "parent": "tropical:block/green_lounge_chair"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "tropical:item/green_lounge_chair"
+  }
 }
