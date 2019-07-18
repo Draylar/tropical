@@ -32,7 +32,8 @@
 
   "requires": {
     "fabricloader": ">=0.4.0",
-    "fabric": "*"
+    "fabric": "*",
+    "valarlib": ">=1.1.3"
   },
   "suggests": {
     "flamingo": "*"
