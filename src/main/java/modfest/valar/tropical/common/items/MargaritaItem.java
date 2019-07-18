@@ -1,5 +1,7 @@
 package modfest.valar.tropical.common.items;
 
+import java.util.List;
+
 import modfest.valar.tropical.common.TropicalItems;
 import modfest.valar.tropical.common.blocks.margarita_maker.Flavor;
 import net.minecraft.client.item.TooltipContext;
@@ -10,14 +12,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class MargaritaItem extends Item
 {

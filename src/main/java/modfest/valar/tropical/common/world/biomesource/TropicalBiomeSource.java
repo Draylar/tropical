@@ -14,7 +14,7 @@ import modfest.valar.tropical.common.world.biomesource.layer.AddIslandVariantsLa
 import modfest.valar.tropical.common.world.biomesource.layer.SetIslandSectionsLayer;
 import modfest.valar.tropical.common.world.biomesource.layer.TropicalSampler;
 import modfest.valar.tropical.common.world.dim.gen.TropicalChunkGenerator;
-import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
+import modfest.valar.tropical.util.noise.TweakableOctaveNoiseGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -146,7 +146,7 @@ public class TropicalBiomeSource extends BiomeSource
 		return this.topMaterials;
 	}
 
-	public static Biome buildBiomes(int x, int z, int finalY, OctaveNoiseGenerator biomeNoise)
+	public static Biome buildBiomes(int x, int z, int finalY, TweakableOctaveNoiseGenerator biomeNoise)
 	{
 		Biome biome = TropicalBiomes.DEFAULT;
 		

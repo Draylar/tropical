@@ -2,9 +2,9 @@ package modfest.valar.tropical.common.world.dim.gen;
 
 import java.util.Random;
 
+import modfest.valar.common.noise.NoiseGenerator;
 import modfest.valar.tropical.common.world.biomesource.TropicalBiomeSource;
-import modfest.valar.tropical.util.noise.NoiseGenerator;
-import modfest.valar.tropical.util.noise.OctaveNoiseGenerator;
+import modfest.valar.tropical.util.noise.TweakableOctaveNoiseGenerator;
 import modfest.valar.tropical.util.properties.MathUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -29,9 +29,9 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
         super(world, biomeSource_1, 4, 8, 256, config, true);
         this.random.consume(2620);
         
-        heightNoise = new OctaveNoiseGenerator(world.getSeed(), 2).apply(30D);
-        blockNoise = new OctaveNoiseGenerator(world.getSeed() - 23L, 6).apply(8D);
-        biomeNoise = new OctaveNoiseGenerator(world.getSeed() + 23L, 2).apply(250D);
+        heightNoise = new TweakableOctaveNoiseGenerator(world.getSeed(), 2).apply(30D);
+        blockNoise = new TweakableOctaveNoiseGenerator(world.getSeed() - 23L, 6).apply(8D);
+        biomeNoise = new TweakableOctaveNoiseGenerator(world.getSeed() + 23L, 2).apply(250D);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TropicalChunkGenerator extends SurfaceChunkGenerator<ChunkGenerator
     {
         double finalY = getTerrainScale(x, z);
         
-        return TropicalBiomeSource.buildBiomes(x, z, (int) finalY, (OctaveNoiseGenerator) biomeNoise);
+        return TropicalBiomeSource.buildBiomes(x, z, (int) finalY, (TweakableOctaveNoiseGenerator) biomeNoise);
     }
     
     static

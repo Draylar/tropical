@@ -1,6 +1,7 @@
 package modfest.valar.tropical.common;
 
-import modfest.valar.tropical.TropicalMod;
+import java.util.ArrayList;
+
 import modfest.valar.tropical.common.blocks.CustomSandBlock;
 import modfest.valar.tropical.common.blocks.LoungeChairBlock;
 import modfest.valar.tropical.common.blocks.PineappleBlock;
@@ -8,15 +9,10 @@ import modfest.valar.tropical.common.blocks.margarita_maker.MargaritaMakerBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import java.util.ArrayList;
 
 public class TropicalBlocks
 {

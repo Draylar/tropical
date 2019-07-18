@@ -1,6 +1,5 @@
 package modfest.valar.tropical.common.entity;
 
-import modfest.valar.tropical.common.TropicalEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.item.ItemStack;

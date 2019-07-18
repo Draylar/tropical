@@ -1,7 +1,7 @@
 package modfest.valar.tropical.common.world.biomesource.layer;
 
+import modfest.valar.common.noise.NoiseGenerator;
 import net.minecraft.world.biome.Biome;
-import modfest.valar.tropical.util.noise.NoiseGenerator;
 
 public interface TropicalSampler
 {

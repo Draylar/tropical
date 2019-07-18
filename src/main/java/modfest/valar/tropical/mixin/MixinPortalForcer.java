@@ -1,18 +1,17 @@
 package modfest.valar.tropical.mixin;
 
-import modfest.valar.tropical.TropicalMod;
-import modfest.valar.tropical.common.world.dim.TeleportPlacementHandler;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.PortalForcer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import modfest.valar.tropical.TropicalMod;
+import modfest.valar.tropical.common.world.dim.TeleportPlacementHandler;
+import net.minecraft.entity.Entity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.PortalForcer;
 
 @Mixin(PortalForcer.class)
 public class MixinPortalForcer

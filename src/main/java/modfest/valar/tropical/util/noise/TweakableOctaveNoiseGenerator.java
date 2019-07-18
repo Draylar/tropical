@@ -2,7 +2,10 @@ package modfest.valar.tropical.util.noise;
 
 import java.util.function.DoubleFunction;
 
-public class OctaveNoiseGenerator implements Cloneable, NoiseGenerator, DoubleFunction<OctaveNoiseGenerator>
+import modfest.valar.common.noise.NoiseGenerator;
+import modfest.valar.common.noise.OpenSimplexNoise;
+
+public class TweakableOctaveNoiseGenerator implements Cloneable, NoiseGenerator, DoubleFunction<TweakableOctaveNoiseGenerator>
 {
     private SingleNoiseGenerator[] generators;
 
@@ -13,7 +16,7 @@ public class OctaveNoiseGenerator implements Cloneable, NoiseGenerator, DoubleFu
     
     private double appliedDouble = 1;
     
-    public OctaveNoiseGenerator(long seed, int octaves)
+    public TweakableOctaveNoiseGenerator(long seed, int octaves)
     {
         this.seed = seed;
         this.octaves = octaves;
@@ -100,7 +103,7 @@ public class OctaveNoiseGenerator implements Cloneable, NoiseGenerator, DoubleFu
     }
 
     @Override
-    public OctaveNoiseGenerator apply(double arg0)
+    public TweakableOctaveNoiseGenerator apply(double arg0)
     {
         for (int i = 0; i < octaves; ++i)
             generators[i] = generators[i].apply(arg0 / Math.pow(2, i));
@@ -110,7 +113,7 @@ public class OctaveNoiseGenerator implements Cloneable, NoiseGenerator, DoubleFu
         return this;
     }
     
-    public OctaveNoiseGenerator tweak(double arg0)
+    public TweakableOctaveNoiseGenerator tweak(double arg0)
     {
         for (int i = 0; i < octaves; ++i)
             generators[i] = generators[i].apply((arg0 * this.appliedDouble) / Math.pow(2, i));
@@ -121,14 +124,14 @@ public class OctaveNoiseGenerator implements Cloneable, NoiseGenerator, DoubleFu
     }
     
     @Override
-    public OctaveNoiseGenerator clone()
+    public TweakableOctaveNoiseGenerator clone()
     {
-    	return new OctaveNoiseGenerator(this.getSeed(), this.octaves).apply(this.appliedDouble);
+    	return new TweakableOctaveNoiseGenerator(this.getSeed(), this.octaves).apply(this.appliedDouble);
     }
     
-    public OctaveNoiseGenerator clone(long seedOffset)
+    public TweakableOctaveNoiseGenerator clone(long seedOffset)
     {
-    	return new OctaveNoiseGenerator(this.getSeed() + seedOffset, this.octaves).apply(this.appliedDouble);
+    	return new TweakableOctaveNoiseGenerator(this.getSeed() + seedOffset, this.octaves).apply(this.appliedDouble);
     }
 
 }
