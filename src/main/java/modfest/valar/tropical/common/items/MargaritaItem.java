@@ -12,8 +12,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.text.Text;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.ScoreText;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.world.World;
 
@@ -45,7 +46,7 @@ public class MargaritaItem extends Item
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, World world, List<Component> list, TooltipContext tooltipContext_1)
+    public void appendTooltip(ItemStack stack, World world, List<Text> list, TooltipContext tooltipContext_1)
     {
         if (stack.hasTag())
         {
@@ -53,7 +54,7 @@ public class MargaritaItem extends Item
             if (tag.containsKey("flavor")) ;
             {
                 String flavor = tag.getString("flavor");
-                list.add(new TextComponent(flavor));
+                list.add(new LiteralText(flavor));
             }
         }
 

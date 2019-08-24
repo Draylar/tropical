@@ -8,7 +8,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BoundingBox;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -73,7 +73,7 @@ public class TikiTotemEntity extends MobEntityWithAi
                 stompingTicks = 0;
                 List<Entity> nearbyEntities = world.getEntities(
                         (Entity) null,
-                        new BoundingBox(
+                        new Box(
                                 new BlockPos(
                                         getPos().getX() - 8,
                                         getPos().getY() - 1,
