@@ -22,7 +22,7 @@ public class OceanSpikeFeature extends Feature<DefaultFeatureConfig>
     @Override
     public boolean generate(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> chunkGenerator, Random random, BlockPos pos, DefaultFeatureConfig defaultFeatureConfig)
     {
-        System.out.println("generating: " + pos);
+        // System.out.println("generating: " + pos);
 
         int aboveOceanHeight = 5 + random.nextInt(10);
 

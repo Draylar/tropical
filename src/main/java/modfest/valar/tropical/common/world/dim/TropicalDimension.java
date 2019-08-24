@@ -1,7 +1,5 @@
 package modfest.valar.tropical.common.world.dim;
 
-import java.util.function.Function;
-
 import modfest.valar.tropical.TropicalMod;
 import modfest.valar.tropical.common.world.biomesource.TropicalBiomeSource;
 import modfest.valar.tropical.common.world.biomesource.TropicalBiomeSourceConfig;
@@ -19,16 +17,10 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 
 public class TropicalDimension extends Dimension
 {
-	public static final BiomeSourceType<TropicalBiomeSourceConfig, TropicalBiomeSource> BIOME_SOURCE = Registry.register(Registry.BIOME_SOURCE_TYPE, "tropical:tropical", new BiomeSourceType<TropicalBiomeSourceConfig, TropicalBiomeSource>(new Function<TropicalBiomeSourceConfig, TropicalBiomeSource>()
-	{
-
-		@Override
-		public TropicalBiomeSource apply(TropicalBiomeSourceConfig t)
-		{
-			return new TropicalBiomeSource();
-			
-		}
-	}, TropicalBiomeSourceConfig::new));
+	public static final BiomeSourceType<TropicalBiomeSourceConfig, TropicalBiomeSource> BIOME_SOURCE = Registry.register(Registry.BIOME_SOURCE_TYPE, "tropical:tropical", new BiomeSourceType<TropicalBiomeSourceConfig, TropicalBiomeSource>(
+			TropicalBiomeSource::new,
+			TropicalBiomeSourceConfig::new
+	));
 	
     public TropicalDimension(World world_1, DimensionType dimensionType_1)
     {
@@ -39,7 +31,7 @@ public class TropicalDimension extends Dimension
 	@Override
     public ChunkGenerator<?> createChunkGenerator()
     {
-        return TropicalMod.FABRIC_CHUNK_GENERATOR.create(world, BIOME_SOURCE.applyConfig(BIOME_SOURCE.getConfig()), new ChunkGeneratorConfig());
+        return TropicalMod.FABRIC_CHUNK_GENERATOR.create(world, BIOME_SOURCE.applyConfig(BIOME_SOURCE.getConfig().setSeed(this.world.getSeed())), new ChunkGeneratorConfig());
     }
 
     @Override

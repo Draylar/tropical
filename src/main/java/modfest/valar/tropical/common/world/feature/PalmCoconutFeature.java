@@ -13,6 +13,8 @@ public class PalmCoconutFeature extends AbstractPalmFeature
 
 	public PalmCoconutFeature(boolean notify)
 	{
+		// this tree appears to fail to generate on sand!
+		// TODO fix this error. Is this broken in the valarlib equivalent?
 		super(notify, 6);
 	}
 

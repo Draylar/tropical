@@ -8,35 +8,49 @@ import com.google.common.collect.Sets;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import modfest.valar.common.noise.NoiseGenerator;
 import modfest.valar.tropical.common.TropicalBiomes;
-import modfest.valar.tropical.common.world.biomesource.layer.AddBeachVariantsLayer;
-import modfest.valar.tropical.common.world.biomesource.layer.AddIslandVariantsLayer;
-import modfest.valar.tropical.common.world.biomesource.layer.SetIslandSectionsLayer;
-import modfest.valar.tropical.common.world.biomesource.layer.TropicalSampler;
 import modfest.valar.tropical.common.world.dim.gen.TropicalChunkGenerator;
+import modfest.valar.tropical.common.world.layer.TropicalLayers;
 import modfest.valar.tropical.util.noise.TweakableOctaveNoiseGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.layer.BiomeLayerSampler;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-//TODO everything lmao
 public class TropicalBiomeSource extends BiomeSource
 {
 	private Biome[] allowedBiomes;
-	private static TropicalSampler islandSampler = new SetIslandSectionsLayer();
-	
-	public TropicalBiomeSource()
+	private final BiomeLayerSampler landSampler, shoreSampler, seaSampler;
+
+	private NoiseGenerator biomeNoise;
+
+	public TropicalBiomeSource(TropicalBiomeSourceConfig config)
 	{
 		this.allowedBiomes = TropicalBiomes.asBiomeArray();
+
+		BiomeLayerSampler[] samplers = TropicalLayers.getBiomeLayers(config.getSeed());
+
+		landSampler = samplers[0];
+		shoreSampler = samplers[1];
+		seaSampler = samplers[2];
+
+		biomeNoise = new TweakableOctaveNoiseGenerator(config.getSeed() + 23L, 3).apply(250D);
 	}
 
 	@Override
 	public Biome getBiome(int x, int z)
 	{
-		return TropicalChunkGenerator.getBiome(x, z);
+		double offset = 4 * biomeNoise.eval(x, z);
+		
+		double y = TropicalChunkGenerator.getTerrainScale(x, z);
+		if (y > 59)
+			y += offset;
+		
+		return this.getBiome(x, (int) y, z);
 	}
 
 	@Override
@@ -146,16 +160,42 @@ public class TropicalBiomeSource extends BiomeSource
 		return this.topMaterials;
 	}
 
-	public static Biome buildBiomes(int x, int z, int finalY, TweakableOctaveNoiseGenerator biomeNoise)
+	public Biome getBiome(int x, int y, int z)
 	{
-		Biome biome = TropicalBiomes.DEFAULT;
-		
-		biome = islandSampler.sample(x, z, finalY, biomeNoise);
-		
-		biome = AddBeachVariantsLayer.INSTANCE.sample(islandSampler, biomeNoise.clone().tweak(1.2D), x, z, finalY);
-		biome = AddIslandVariantsLayer.INSTANCE.sample(islandSampler, biomeNoise.clone().tweak(0.8D), x, z, finalY);
-		
+		IslandSection section = IslandSection.get(y);
+
+		Biome biome = getSectionBiome(section, x, z);
+
 		return biome;
+	}
+
+	private Biome getSectionBiome(IslandSection section, int x, int z)
+	{
+		switch(section)
+		{
+		case LAND:
+			return landSampler.sample(x, z);
+		case SEA:
+			return seaSampler.sample(x, z);
+		case SHORE:
+			return shoreSampler.sample(x, z);
+		default:
+			return TropicalBiomes.DEFAULT;
+		}
+	}
+
+	private static enum IslandSection
+	{
+		SEA,
+		SHORE,
+		LAND;
+
+		public static IslandSection get(int height)
+		{
+			if (height < 59) return SEA;
+			else if (height < 64) return SHORE;
+			else return LAND;
+		}
 	}
 
 }

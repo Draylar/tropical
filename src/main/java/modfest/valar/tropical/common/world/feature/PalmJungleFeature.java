@@ -43,8 +43,6 @@ public class PalmJungleFeature extends AbstractPalmFeature
 		{
 			generator.setBlock(getBend(pos, i, bendDirection), LOG, false);
 		}
-
-		//TODO Coconut
 	}
 
 	private BlockPos getBend(BlockPos pos, int up, int direction)
